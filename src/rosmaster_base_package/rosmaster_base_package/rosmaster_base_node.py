@@ -24,6 +24,8 @@ class RosmasterBaseNode(Node):
         self.declare_parameter('odom_frame', 'odom')
         # 엔코더 tick 부호 (전진 시 tick 이 증가면 1.0, 감소면 -1.0)
         self.declare_parameter('enc_sign', -1.0)
+        # 회전량 보정 계수 (실측 대비 과대/과소 회전을 맞추기 위해 기본 0.8 적용)
+        self.declare_parameter('yaw_scale', 0.8)
 
         self.wheel_radius = float(self.get_parameter('wheel_radius').value)
         self.track_width = float(self.get_parameter('track_width').value)
@@ -32,12 +34,14 @@ class RosmasterBaseNode(Node):
         self.base_frame = self.get_parameter('base_frame').value
         self.odom_frame = self.get_parameter('odom_frame').value
         self.enc_sign = float(self.get_parameter('enc_sign').value)
+        self.yaw_scale = float(self.get_parameter('yaw_scale').value)
 
         self.get_logger().info(
             f"wheel_radius={self.wheel_radius}, "
             f"track_width={self.track_width}, "
             f"ticks_per_rev={self.ticks_per_rev}, "
-            f"enc_sign={self.enc_sign}"
+            f"enc_sign={self.enc_sign}, "
+            f"yaw_scale={self.yaw_scale}"
         )
 
         # ===== Rosmaster 보드 초기화 =====
@@ -169,7 +173,7 @@ class RosmasterBaseNode(Node):
         ds = 0.5 * (dist_right + dist_left)
         dtheta = 0.0
         if self.track_width != 0.0:
-            dtheta = (dist_right - dist_left) / self.track_width
+            dtheta = self.yaw_scale * (dist_right - dist_left) / self.track_width
 
         self.yaw += float(dtheta)
         self.x += float(ds * math.cos(self.yaw))

@@ -32,9 +32,10 @@ def generate_launch_description():
         parameters=[{
             # 필요한 경우에만 파라미터 추가, 일단 비워둬도 됨
             # 'wheel_radius': 0.095,
-            # 'track_width': 0.483,
+            # 'track_width': 0.60375,
             # 'ticks_per_rev': 8896.0,
             # 'enc_sign': -1.0,
+            'yaw_scale': 0.8,  # 실측 360도 회전에 RViz 450도 -> 0.8로 보정
         }]
     )
 
