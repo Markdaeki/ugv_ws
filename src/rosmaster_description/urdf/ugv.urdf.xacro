@@ -212,7 +212,8 @@
   <joint name="laser_joint" type="fixed">
     <parent link="base_link"/>
     <child link="laser_link"/>
-    <origin xyz="${LIDAR_X} 0 ${LIDAR_Z}" rpy="0 0 ${PI}"/>
+    <!-- LIDAR를 전면을 바라보도록 yaw 회전을 0으로 설정 -->
+    <origin xyz="${LIDAR_X} 0 ${LIDAR_Z}" rpy="0 0 0"/>
   </joint>
 
   <joint name="imu_joint" type="fixed">
