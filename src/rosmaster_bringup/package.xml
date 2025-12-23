@@ -24,9 +24,10 @@
 
   <!-- 카메라 드라이버 -->
   <exec_depend>v4l2_camera</exec_depend>
+  <!-- SLAM -->
+  <exec_depend>slam_toolbox</exec_depend>
 
   <export>
     <build_type>ament_python</build_type>
   </export>
 </package>
-

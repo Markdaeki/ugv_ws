@@ -16,6 +16,9 @@ setup(
         # ★ launch 파일 설치
         (os.path.join('share', package_name, 'launch'),
          glob('launch/*.launch.py')),
+        # SLAM 파라미터 파일 설치
+        (os.path.join('share', package_name, 'config'),
+         glob('config/*.yaml')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -30,4 +33,3 @@ setup(
         ],
     },
 )
-
