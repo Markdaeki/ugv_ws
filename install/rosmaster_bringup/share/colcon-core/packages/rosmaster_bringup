@@ -1,1 +1,1 @@
-launch:launch_ros:robot_state_publisher:rosmaster_base_package:rosmaster_description:v4l2_camera
+launch:launch_ros:robot_state_publisher:rosmaster_base_package:rosmaster_description:slam_toolbox:v4l2_camera

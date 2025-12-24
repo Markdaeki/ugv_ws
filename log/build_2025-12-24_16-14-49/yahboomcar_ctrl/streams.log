@@ -1,0 +1,21 @@
+[2.925s] Invoking command in '/home/wens/ugv_ws/build/yahboomcar_ctrl': PYTHONPATH=/home/wens/ugv_ws/build/yahboomcar_ctrl/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wens/ugv_ws/install/yahboomcar_ctrl/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/wens/ugv_ws/build/yahboomcar_ctrl/build --no-deps symlink_data
+[3.483s] /usr/lib/python3/dist-packages/setuptools/dist.py:723: UserWarning: Usage of dash-separated 'script-dir' will not be supported in future versions. Please use the underscore name 'script_dir' instead
+[3.484s]   warnings.warn(
+[3.554s] running develop
+[3.952s] running egg_info
+[3.952s] writing yahboomcar_ctrl.egg-info/PKG-INFO
+[3.953s] writing dependency_links to yahboomcar_ctrl.egg-info/dependency_links.txt
+[3.953s] writing entry points to yahboomcar_ctrl.egg-info/entry_points.txt
+[3.953s] writing requirements to yahboomcar_ctrl.egg-info/requires.txt
+[3.954s] writing top-level names to yahboomcar_ctrl.egg-info/top_level.txt
+[3.958s] reading manifest file 'yahboomcar_ctrl.egg-info/SOURCES.txt'
+[3.960s] writing manifest file 'yahboomcar_ctrl.egg-info/SOURCES.txt'
+[3.963s] running build_ext
+[3.963s] Creating /home/wens/ugv_ws/install/yahboomcar_ctrl/lib/python3.10/site-packages/yahboomcar-ctrl.egg-link (link to .)
+[3.965s] Installing yahboom_joy_R2 script to /home/wens/ugv_ws/install/yahboomcar_ctrl/lib/yahboomcar_ctrl
+[3.966s] Installing yahboom_joy_X3 script to /home/wens/ugv_ws/install/yahboomcar_ctrl/lib/yahboomcar_ctrl
+[3.966s] Installing yahboom_keyboard script to /home/wens/ugv_ws/install/yahboomcar_ctrl/lib/yahboomcar_ctrl
+[3.967s] 
+[3.967s] Installed /home/wens/ugv_ws/build/yahboomcar_ctrl
+[3.967s] running symlink_data
+[4.087s] Invoked command in '/home/wens/ugv_ws/build/yahboomcar_ctrl' returned '0': PYTHONPATH=/home/wens/ugv_ws/build/yahboomcar_ctrl/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wens/ugv_ws/install/yahboomcar_ctrl/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/wens/ugv_ws/build/yahboomcar_ctrl/build --no-deps symlink_data

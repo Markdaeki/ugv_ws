@@ -1,0 +1,371 @@
+[0.275s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[0.275s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=6, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0xffffa8f9fa60>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0xffffa8f9f520>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0xffffa8f9f520>>, mixin_verb=('build',))
+[0.696s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.696s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.696s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.696s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.696s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.697s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.697s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/wens/ugv_ws'
+[0.697s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.697s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.697s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.698s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.698s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.698s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.698s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.698s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.698s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.725s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.725s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.732s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.732s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.732s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.733s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.733s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.733s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.733s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['ignore', 'ignore_ament_install']
+[0.734s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'ignore'
+[0.734s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'ignore_ament_install'
+[0.734s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['colcon_pkg']
+[0.734s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'colcon_pkg'
+[0.734s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['colcon_meta']
+[0.734s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'colcon_meta'
+[0.734s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['ros']
+[0.734s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'ros'
+[0.734s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['cmake', 'python']
+[0.735s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'cmake'
+[0.735s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'python'
+[0.735s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['python_setup_py']
+[0.735s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'python_setup_py'
+[0.735s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.735s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.735s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.736s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.736s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.736s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.736s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.736s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.736s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.736s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.737s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.737s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.737s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.737s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.737s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.737s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.737s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.737s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.737s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.737s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.738s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_base_package) by extensions ['ignore', 'ignore_ament_install']
+[0.738s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_base_package) by extension 'ignore'
+[0.738s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_base_package) by extension 'ignore_ament_install'
+[0.738s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_base_package) by extensions ['colcon_pkg']
+[0.738s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_base_package) by extension 'colcon_pkg'
+[0.738s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_base_package) by extensions ['colcon_meta']
+[0.738s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_base_package) by extension 'colcon_meta'
+[0.738s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_base_package) by extensions ['ros']
+[0.739s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_base_package) by extension 'ros'
+[0.744s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rosmaster_base_package' with type 'ros.ament_python' and name 'rosmaster_base_package'
+[0.745s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_bringup) by extensions ['ignore', 'ignore_ament_install']
+[0.745s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_bringup) by extension 'ignore'
+[0.745s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_bringup) by extension 'ignore_ament_install'
+[0.745s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_bringup) by extensions ['colcon_pkg']
+[0.745s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_bringup) by extension 'colcon_pkg'
+[0.745s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_bringup) by extensions ['colcon_meta']
+[0.745s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_bringup) by extension 'colcon_meta'
+[0.745s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_bringup) by extensions ['ros']
+[0.746s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_bringup) by extension 'ros'
+[0.747s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rosmaster_bringup' with type 'ros.ament_python' and name 'rosmaster_bringup'
+[0.747s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_description) by extensions ['ignore', 'ignore_ament_install']
+[0.747s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_description) by extension 'ignore'
+[0.748s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_description) by extension 'ignore_ament_install'
+[0.748s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_description) by extensions ['colcon_pkg']
+[0.748s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_description) by extension 'colcon_pkg'
+[0.748s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_description) by extensions ['colcon_meta']
+[0.748s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_description) by extension 'colcon_meta'
+[0.748s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_description) by extensions ['ros']
+[0.748s] Level 1:colcon.colcon_core.package_identification:_identify(src/rosmaster_description) by extension 'ros'
+[0.750s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rosmaster_description' with type 'ros.ament_python' and name 'rosmaster_description'
+[0.750s] Level 1:colcon.colcon_core.package_identification:_identify(src/sllidar_ros2) by extensions ['ignore', 'ignore_ament_install']
+[0.750s] Level 1:colcon.colcon_core.package_identification:_identify(src/sllidar_ros2) by extension 'ignore'
+[0.750s] Level 1:colcon.colcon_core.package_identification:_identify(src/sllidar_ros2) by extension 'ignore_ament_install'
+[0.751s] Level 1:colcon.colcon_core.package_identification:_identify(src/sllidar_ros2) by extensions ['colcon_pkg']
+[0.751s] Level 1:colcon.colcon_core.package_identification:_identify(src/sllidar_ros2) by extension 'colcon_pkg'
+[0.751s] Level 1:colcon.colcon_core.package_identification:_identify(src/sllidar_ros2) by extensions ['colcon_meta']
+[0.751s] Level 1:colcon.colcon_core.package_identification:_identify(src/sllidar_ros2) by extension 'colcon_meta'
+[0.751s] Level 1:colcon.colcon_core.package_identification:_identify(src/sllidar_ros2) by extensions ['ros']
+[0.751s] Level 1:colcon.colcon_core.package_identification:_identify(src/sllidar_ros2) by extension 'ros'
+[0.753s] DEBUG:colcon.colcon_core.package_identification:Package 'src/sllidar_ros2' with type 'ros.ament_cmake' and name 'sllidar_ros2'
+[0.753s] Level 1:colcon.colcon_core.package_identification:_identify(src/yahboomcar_ctrl) by extensions ['ignore', 'ignore_ament_install']
+[0.754s] Level 1:colcon.colcon_core.package_identification:_identify(src/yahboomcar_ctrl) by extension 'ignore'
+[0.754s] Level 1:colcon.colcon_core.package_identification:_identify(src/yahboomcar_ctrl) by extension 'ignore_ament_install'
+[0.754s] Level 1:colcon.colcon_core.package_identification:_identify(src/yahboomcar_ctrl) by extensions ['colcon_pkg']
+[0.754s] Level 1:colcon.colcon_core.package_identification:_identify(src/yahboomcar_ctrl) by extension 'colcon_pkg'
+[0.754s] Level 1:colcon.colcon_core.package_identification:_identify(src/yahboomcar_ctrl) by extensions ['colcon_meta']
+[0.754s] Level 1:colcon.colcon_core.package_identification:_identify(src/yahboomcar_ctrl) by extension 'colcon_meta'
+[0.754s] Level 1:colcon.colcon_core.package_identification:_identify(src/yahboomcar_ctrl) by extensions ['ros']
+[0.754s] Level 1:colcon.colcon_core.package_identification:_identify(src/yahboomcar_ctrl) by extension 'ros'
+[0.756s] DEBUG:colcon.colcon_core.package_identification:Package 'src/yahboomcar_ctrl' with type 'ros.ament_python' and name 'yahboomcar_ctrl'
+[0.756s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.756s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.756s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.756s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.756s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.840s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.840s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.845s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 5 installed packages in /home/wens/ugv_ws/install
+[0.848s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 291 installed packages in /opt/ros/humble
+[0.851s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.943s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_base_package' build argument 'cmake_args' from command line to 'None'
+[0.943s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_base_package' build argument 'cmake_target' from command line to 'None'
+[0.944s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_base_package' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.944s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_base_package' build argument 'cmake_clean_cache' from command line to 'False'
+[0.944s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_base_package' build argument 'cmake_clean_first' from command line to 'False'
+[0.944s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_base_package' build argument 'cmake_force_configure' from command line to 'False'
+[0.944s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_base_package' build argument 'ament_cmake_args' from command line to 'None'
+[0.944s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_base_package' build argument 'catkin_cmake_args' from command line to 'None'
+[0.944s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_base_package' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.944s] DEBUG:colcon.colcon_core.verb:Building package 'rosmaster_base_package' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/wens/ugv_ws/build/rosmaster_base_package', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/wens/ugv_ws/install/rosmaster_base_package', 'merge_install': False, 'path': '/home/wens/ugv_ws/src/rosmaster_base_package', 'symlink_install': True, 'test_result_base': None}
+[0.945s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_description' build argument 'cmake_args' from command line to 'None'
+[0.945s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_description' build argument 'cmake_target' from command line to 'None'
+[0.945s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.945s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.945s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.945s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.945s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.945s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.945s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.945s] DEBUG:colcon.colcon_core.verb:Building package 'rosmaster_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/wens/ugv_ws/build/rosmaster_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/wens/ugv_ws/install/rosmaster_description', 'merge_install': False, 'path': '/home/wens/ugv_ws/src/rosmaster_description', 'symlink_install': True, 'test_result_base': None}
+[0.946s] Level 5:colcon.colcon_core.verb:set package 'sllidar_ros2' build argument 'cmake_args' from command line to 'None'
+[0.946s] Level 5:colcon.colcon_core.verb:set package 'sllidar_ros2' build argument 'cmake_target' from command line to 'None'
+[0.946s] Level 5:colcon.colcon_core.verb:set package 'sllidar_ros2' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.946s] Level 5:colcon.colcon_core.verb:set package 'sllidar_ros2' build argument 'cmake_clean_cache' from command line to 'False'
+[0.946s] Level 5:colcon.colcon_core.verb:set package 'sllidar_ros2' build argument 'cmake_clean_first' from command line to 'False'
+[0.946s] Level 5:colcon.colcon_core.verb:set package 'sllidar_ros2' build argument 'cmake_force_configure' from command line to 'False'
+[0.946s] Level 5:colcon.colcon_core.verb:set package 'sllidar_ros2' build argument 'ament_cmake_args' from command line to 'None'
+[0.946s] Level 5:colcon.colcon_core.verb:set package 'sllidar_ros2' build argument 'catkin_cmake_args' from command line to 'None'
+[0.947s] Level 5:colcon.colcon_core.verb:set package 'sllidar_ros2' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.947s] DEBUG:colcon.colcon_core.verb:Building package 'sllidar_ros2' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/wens/ugv_ws/build/sllidar_ros2', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/wens/ugv_ws/install/sllidar_ros2', 'merge_install': False, 'path': '/home/wens/ugv_ws/src/sllidar_ros2', 'symlink_install': True, 'test_result_base': None}
+[0.947s] Level 5:colcon.colcon_core.verb:set package 'yahboomcar_ctrl' build argument 'cmake_args' from command line to 'None'
+[0.947s] Level 5:colcon.colcon_core.verb:set package 'yahboomcar_ctrl' build argument 'cmake_target' from command line to 'None'
+[0.947s] Level 5:colcon.colcon_core.verb:set package 'yahboomcar_ctrl' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.947s] Level 5:colcon.colcon_core.verb:set package 'yahboomcar_ctrl' build argument 'cmake_clean_cache' from command line to 'False'
+[0.947s] Level 5:colcon.colcon_core.verb:set package 'yahboomcar_ctrl' build argument 'cmake_clean_first' from command line to 'False'
+[0.948s] Level 5:colcon.colcon_core.verb:set package 'yahboomcar_ctrl' build argument 'cmake_force_configure' from command line to 'False'
+[0.948s] Level 5:colcon.colcon_core.verb:set package 'yahboomcar_ctrl' build argument 'ament_cmake_args' from command line to 'None'
+[0.948s] Level 5:colcon.colcon_core.verb:set package 'yahboomcar_ctrl' build argument 'catkin_cmake_args' from command line to 'None'
+[0.948s] Level 5:colcon.colcon_core.verb:set package 'yahboomcar_ctrl' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.948s] DEBUG:colcon.colcon_core.verb:Building package 'yahboomcar_ctrl' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/wens/ugv_ws/build/yahboomcar_ctrl', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/wens/ugv_ws/install/yahboomcar_ctrl', 'merge_install': False, 'path': '/home/wens/ugv_ws/src/yahboomcar_ctrl', 'symlink_install': True, 'test_result_base': None}
+[0.948s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_bringup' build argument 'cmake_args' from command line to 'None'
+[0.949s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_bringup' build argument 'cmake_target' from command line to 'None'
+[0.949s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_bringup' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.949s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_bringup' build argument 'cmake_clean_cache' from command line to 'False'
+[0.949s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_bringup' build argument 'cmake_clean_first' from command line to 'False'
+[0.949s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_bringup' build argument 'cmake_force_configure' from command line to 'False'
+[0.949s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_bringup' build argument 'ament_cmake_args' from command line to 'None'
+[0.949s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_bringup' build argument 'catkin_cmake_args' from command line to 'None'
+[0.949s] Level 5:colcon.colcon_core.verb:set package 'rosmaster_bringup' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.949s] DEBUG:colcon.colcon_core.verb:Building package 'rosmaster_bringup' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/wens/ugv_ws/build/rosmaster_bringup', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/wens/ugv_ws/install/rosmaster_bringup', 'merge_install': False, 'path': '/home/wens/ugv_ws/src/rosmaster_bringup', 'symlink_install': True, 'test_result_base': None}
+[0.949s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.952s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.954s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/wens/ugv_ws/src/rosmaster_base_package' with build type 'ament_python'
+[0.955s] Level 1:colcon.colcon_core.shell:create_environment_hook('rosmaster_base_package', 'ament_prefix_path')
+[0.960s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.960s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/rosmaster_base_package/share/rosmaster_base_package/hook/ament_prefix_path.ps1'
+[0.964s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wens/ugv_ws/install/rosmaster_base_package/share/rosmaster_base_package/hook/ament_prefix_path.dsv'
+[0.965s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/rosmaster_base_package/share/rosmaster_base_package/hook/ament_prefix_path.sh'
+[0.967s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.967s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.975s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/wens/ugv_ws/src/rosmaster_description' with build type 'ament_python'
+[0.975s] Level 1:colcon.colcon_core.shell:create_environment_hook('rosmaster_description', 'ament_prefix_path')
+[0.976s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/rosmaster_description/share/rosmaster_description/hook/ament_prefix_path.ps1'
+[0.977s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wens/ugv_ws/install/rosmaster_description/share/rosmaster_description/hook/ament_prefix_path.dsv'
+[0.978s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/rosmaster_description/share/rosmaster_description/hook/ament_prefix_path.sh'
+[0.979s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.980s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.987s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/wens/ugv_ws/src/sllidar_ros2' with build type 'ament_cmake'
+[0.987s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/wens/ugv_ws/src/sllidar_ros2'
+[0.988s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.988s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.997s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/wens/ugv_ws/src/yahboomcar_ctrl' with build type 'ament_python'
+[0.997s] Level 1:colcon.colcon_core.shell:create_environment_hook('yahboomcar_ctrl', 'ament_prefix_path')
+[0.998s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/yahboomcar_ctrl/share/yahboomcar_ctrl/hook/ament_prefix_path.ps1'
+[1.000s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wens/ugv_ws/install/yahboomcar_ctrl/share/yahboomcar_ctrl/hook/ament_prefix_path.dsv'
+[1.003s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/yahboomcar_ctrl/share/yahboomcar_ctrl/hook/ament_prefix_path.sh'
+[1.004s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.004s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.807s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/wens/ugv_ws/src/rosmaster_base_package'
+[1.808s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.808s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.531s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/wens/ugv_ws/src/rosmaster_description'
+[2.531s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.532s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.553s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/wens/ugv_ws/build/sllidar_ros2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/wens/ugv_ws/install/yahboomcar_ctrl:/home/wens/ugv_ws/install/rosmaster_bringup:/home/wens/ugv_ws/install/rosmaster_description:/home/wens/ugv_ws/install/rosmaster_base_package:/opt/ros/humble /usr/bin/cmake --build /home/wens/ugv_ws/build/sllidar_ros2 -- -j6 -l6
+[3.202s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/wens/ugv_ws/src/yahboomcar_ctrl'
+[3.203s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.203s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.227s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/wens/ugv_ws/build/sllidar_ros2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/wens/ugv_ws/install/yahboomcar_ctrl:/home/wens/ugv_ws/install/rosmaster_bringup:/home/wens/ugv_ws/install/rosmaster_description:/home/wens/ugv_ws/install/rosmaster_base_package:/opt/ros/humble /usr/bin/cmake --build /home/wens/ugv_ws/build/sllidar_ros2 -- -j6 -l6
+[3.254s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/wens/ugv_ws/build/sllidar_ros2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/wens/ugv_ws/install/yahboomcar_ctrl:/home/wens/ugv_ws/install/rosmaster_bringup:/home/wens/ugv_ws/install/rosmaster_description:/home/wens/ugv_ws/install/rosmaster_base_package:/opt/ros/humble /usr/bin/cmake --install /home/wens/ugv_ws/build/sllidar_ros2
+[3.331s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(sllidar_ros2)
+[3.334s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/wens/ugv_ws/build/sllidar_ros2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/wens/ugv_ws/install/yahboomcar_ctrl:/home/wens/ugv_ws/install/rosmaster_bringup:/home/wens/ugv_ws/install/rosmaster_description:/home/wens/ugv_ws/install/rosmaster_base_package:/opt/ros/humble /usr/bin/cmake --install /home/wens/ugv_ws/build/sllidar_ros2
+[3.341s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/sllidar_ros2' for CMake module files
+[3.342s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/sllidar_ros2' for CMake config files
+[3.343s] Level 1:colcon.colcon_core.shell:create_environment_hook('sllidar_ros2', 'cmake_prefix_path')
+[3.344s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/hook/cmake_prefix_path.ps1'
+[3.345s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/hook/cmake_prefix_path.dsv'
+[3.346s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/hook/cmake_prefix_path.sh'
+[3.347s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/sllidar_ros2/lib'
+[3.348s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/sllidar_ros2/bin'
+[3.348s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/sllidar_ros2/lib/pkgconfig/sllidar_ros2.pc'
+[3.349s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/sllidar_ros2/lib/python3.10/site-packages'
+[3.349s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/sllidar_ros2/bin'
+[3.350s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/package.ps1'
+[3.352s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/package.dsv'
+[3.354s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/package.sh'
+[3.356s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/package.bash'
+[3.358s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/package.zsh'
+[3.359s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/wens/ugv_ws/install/sllidar_ros2/share/colcon-core/packages/sllidar_ros2)
+[3.361s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(sllidar_ros2)
+[3.362s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/sllidar_ros2' for CMake module files
+[3.363s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/sllidar_ros2' for CMake config files
+[3.363s] Level 1:colcon.colcon_core.shell:create_environment_hook('sllidar_ros2', 'cmake_prefix_path')
+[3.364s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/hook/cmake_prefix_path.ps1'
+[3.365s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/hook/cmake_prefix_path.dsv'
+[3.366s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/hook/cmake_prefix_path.sh'
+[3.367s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/sllidar_ros2/lib'
+[3.367s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/sllidar_ros2/bin'
+[3.367s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/sllidar_ros2/lib/pkgconfig/sllidar_ros2.pc'
+[3.368s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/sllidar_ros2/lib/python3.10/site-packages'
+[3.369s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/sllidar_ros2/bin'
+[3.369s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/package.ps1'
+[3.371s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/package.dsv'
+[3.372s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/package.sh'
+[3.373s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/package.bash'
+[3.374s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/package.zsh'
+[3.375s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/wens/ugv_ws/install/sllidar_ros2/share/colcon-core/packages/sllidar_ros2)
+[4.077s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/wens/ugv_ws/build/rosmaster_base_package': PYTHONPATH=/home/wens/ugv_ws/build/rosmaster_base_package/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wens/ugv_ws/install/rosmaster_base_package/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/wens/ugv_ws/build/rosmaster_base_package/build --no-deps symlink_data
+[4.143s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/wens/ugv_ws/build/rosmaster_description': PYTHONPATH=/home/wens/ugv_ws/build/rosmaster_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wens/ugv_ws/install/rosmaster_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/wens/ugv_ws/build/rosmaster_description/build --no-deps symlink_data
+[4.192s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/wens/ugv_ws/build/yahboomcar_ctrl': PYTHONPATH=/home/wens/ugv_ws/build/yahboomcar_ctrl/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wens/ugv_ws/install/yahboomcar_ctrl/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/wens/ugv_ws/build/yahboomcar_ctrl/build --no-deps symlink_data
+[5.228s] Level 1:colcon.colcon_core.shell:create_environment_hook('rosmaster_base_package', 'pythonpath_develop')
+[5.232s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/build/rosmaster_base_package/share/rosmaster_base_package/hook/pythonpath_develop.ps1'
+[5.233s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/wens/ugv_ws/build/rosmaster_base_package' returned '0': PYTHONPATH=/home/wens/ugv_ws/build/rosmaster_base_package/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wens/ugv_ws/install/rosmaster_base_package/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/wens/ugv_ws/build/rosmaster_base_package/build --no-deps symlink_data
+[5.235s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wens/ugv_ws/build/rosmaster_base_package/share/rosmaster_base_package/hook/pythonpath_develop.dsv'
+[5.236s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/build/rosmaster_base_package/share/rosmaster_base_package/hook/pythonpath_develop.sh'
+[5.238s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_base_package' for CMake module files
+[5.240s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_base_package' for CMake config files
+[5.241s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_base_package/lib'
+[5.242s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_base_package/bin'
+[5.242s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_base_package/lib/pkgconfig/rosmaster_base_package.pc'
+[5.243s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_base_package/lib/python3.10/site-packages'
+[5.243s] Level 1:colcon.colcon_core.shell:create_environment_hook('rosmaster_base_package', 'pythonpath')
+[5.244s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/rosmaster_base_package/share/rosmaster_base_package/hook/pythonpath.ps1'
+[5.246s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wens/ugv_ws/install/rosmaster_base_package/share/rosmaster_base_package/hook/pythonpath.dsv'
+[5.247s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/rosmaster_base_package/share/rosmaster_base_package/hook/pythonpath.sh'
+[5.250s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_base_package/bin'
+[5.250s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rosmaster_base_package)
+[5.251s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/rosmaster_base_package/share/rosmaster_base_package/package.ps1'
+[5.253s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/wens/ugv_ws/install/rosmaster_base_package/share/rosmaster_base_package/package.dsv'
+[5.255s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/rosmaster_base_package/share/rosmaster_base_package/package.sh'
+[5.258s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/rosmaster_base_package/share/rosmaster_base_package/package.bash'
+[5.259s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/rosmaster_base_package/share/rosmaster_base_package/package.zsh'
+[5.260s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/wens/ugv_ws/install/rosmaster_base_package/share/colcon-core/packages/rosmaster_base_package)
+[5.325s] Level 1:colcon.colcon_core.shell:create_environment_hook('rosmaster_description', 'pythonpath_develop')
+[5.326s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/build/rosmaster_description/share/rosmaster_description/hook/pythonpath_develop.ps1'
+[5.328s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/wens/ugv_ws/build/rosmaster_description' returned '0': PYTHONPATH=/home/wens/ugv_ws/build/rosmaster_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wens/ugv_ws/install/rosmaster_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/wens/ugv_ws/build/rosmaster_description/build --no-deps symlink_data
+[5.329s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wens/ugv_ws/build/rosmaster_description/share/rosmaster_description/hook/pythonpath_develop.dsv'
+[5.332s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/build/rosmaster_description/share/rosmaster_description/hook/pythonpath_develop.sh'
+[5.335s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_description' for CMake module files
+[5.337s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_description' for CMake config files
+[5.340s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_description/lib'
+[5.340s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_description/bin'
+[5.341s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_description/lib/pkgconfig/rosmaster_description.pc'
+[5.343s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_description/lib/python3.10/site-packages'
+[5.343s] Level 1:colcon.colcon_core.shell:create_environment_hook('rosmaster_description', 'pythonpath')
+[5.344s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/rosmaster_description/share/rosmaster_description/hook/pythonpath.ps1'
+[5.350s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wens/ugv_ws/install/rosmaster_description/share/rosmaster_description/hook/pythonpath.dsv'
+[5.352s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/rosmaster_description/share/rosmaster_description/hook/pythonpath.sh'
+[5.355s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_description/bin'
+[5.356s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rosmaster_description)
+[5.357s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/rosmaster_description/share/rosmaster_description/package.ps1'
+[5.359s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/wens/ugv_ws/install/rosmaster_description/share/rosmaster_description/package.dsv'
+[5.361s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/rosmaster_description/share/rosmaster_description/package.sh'
+[5.363s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/rosmaster_description/share/rosmaster_description/package.bash'
+[5.364s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/rosmaster_description/share/rosmaster_description/package.zsh'
+[5.365s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/wens/ugv_ws/install/rosmaster_description/share/colcon-core/packages/rosmaster_description)
+[5.366s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/wens/ugv_ws/src/rosmaster_bringup' with build type 'ament_python'
+[5.367s] Level 1:colcon.colcon_core.shell:create_environment_hook('rosmaster_bringup', 'ament_prefix_path')
+[5.367s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/rosmaster_bringup/share/rosmaster_bringup/hook/ament_prefix_path.ps1'
+[5.370s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wens/ugv_ws/install/rosmaster_bringup/share/rosmaster_bringup/hook/ament_prefix_path.dsv'
+[5.371s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/rosmaster_bringup/share/rosmaster_bringup/hook/ament_prefix_path.sh'
+[5.373s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[5.373s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[6.044s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/wens/ugv_ws/src/rosmaster_bringup'
+[6.045s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[6.045s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[6.060s] Level 1:colcon.colcon_core.shell:create_environment_hook('yahboomcar_ctrl', 'pythonpath_develop')
+[6.061s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/build/yahboomcar_ctrl/share/yahboomcar_ctrl/hook/pythonpath_develop.ps1'
+[6.062s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/wens/ugv_ws/build/yahboomcar_ctrl' returned '0': PYTHONPATH=/home/wens/ugv_ws/build/yahboomcar_ctrl/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wens/ugv_ws/install/yahboomcar_ctrl/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/wens/ugv_ws/build/yahboomcar_ctrl/build --no-deps symlink_data
+[6.064s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wens/ugv_ws/build/yahboomcar_ctrl/share/yahboomcar_ctrl/hook/pythonpath_develop.dsv'
+[6.065s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/build/yahboomcar_ctrl/share/yahboomcar_ctrl/hook/pythonpath_develop.sh'
+[6.067s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/yahboomcar_ctrl' for CMake module files
+[6.067s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/yahboomcar_ctrl' for CMake config files
+[6.069s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/yahboomcar_ctrl/lib'
+[6.069s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/yahboomcar_ctrl/bin'
+[6.069s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/yahboomcar_ctrl/lib/pkgconfig/yahboomcar_ctrl.pc'
+[6.070s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/yahboomcar_ctrl/lib/python3.10/site-packages'
+[6.070s] Level 1:colcon.colcon_core.shell:create_environment_hook('yahboomcar_ctrl', 'pythonpath')
+[6.070s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/yahboomcar_ctrl/share/yahboomcar_ctrl/hook/pythonpath.ps1'
+[6.071s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wens/ugv_ws/install/yahboomcar_ctrl/share/yahboomcar_ctrl/hook/pythonpath.dsv'
+[6.072s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/yahboomcar_ctrl/share/yahboomcar_ctrl/hook/pythonpath.sh'
+[6.075s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/yahboomcar_ctrl/bin'
+[6.075s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(yahboomcar_ctrl)
+[6.076s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/yahboomcar_ctrl/share/yahboomcar_ctrl/package.ps1'
+[6.079s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/wens/ugv_ws/install/yahboomcar_ctrl/share/yahboomcar_ctrl/package.dsv'
+[6.082s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/yahboomcar_ctrl/share/yahboomcar_ctrl/package.sh'
+[6.086s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/yahboomcar_ctrl/share/yahboomcar_ctrl/package.bash'
+[6.089s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/yahboomcar_ctrl/share/yahboomcar_ctrl/package.zsh'
+[6.091s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/wens/ugv_ws/install/yahboomcar_ctrl/share/colcon-core/packages/yahboomcar_ctrl)
+[6.904s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/wens/ugv_ws/build/rosmaster_bringup': AMENT_PREFIX_PATH=/home/wens/ugv_ws/install/rosmaster_description:/home/wens/ugv_ws/install/rosmaster_base_package:/home/wens/ugv_ws/install/yahboomcar_ctrl:/home/wens/ugv_ws/install/sllidar_ros2:/home/wens/ugv_ws/install/rosmaster_bringup:/opt/ros/humble PYTHONPATH=/home/wens/ugv_ws/build/rosmaster_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wens/ugv_ws/install/rosmaster_bringup/lib/python3.10/site-packages:/home/wens/ugv_ws/build/rosmaster_description:/home/wens/ugv_ws/install/rosmaster_description/lib/python3.10/site-packages:/home/wens/ugv_ws/build/rosmaster_base_package:/home/wens/ugv_ws/install/rosmaster_base_package/lib/python3.10/site-packages:/home/wens/ugv_ws/build/yahboomcar_ctrl:/home/wens/ugv_ws/install/yahboomcar_ctrl/lib/python3.10/site-packages:/home/wens/ugv_ws/build/rosmaster_bringup:/home/wens/ugv_ws/install/rosmaster_bringup/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/wens/ugv_ws/build/rosmaster_bringup/build --no-deps symlink_data
+[8.056s] Level 1:colcon.colcon_core.shell:create_environment_hook('rosmaster_bringup', 'pythonpath_develop')
+[8.057s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/build/rosmaster_bringup/share/rosmaster_bringup/hook/pythonpath_develop.ps1'
+[8.058s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/wens/ugv_ws/build/rosmaster_bringup' returned '0': AMENT_PREFIX_PATH=/home/wens/ugv_ws/install/rosmaster_description:/home/wens/ugv_ws/install/rosmaster_base_package:/home/wens/ugv_ws/install/yahboomcar_ctrl:/home/wens/ugv_ws/install/sllidar_ros2:/home/wens/ugv_ws/install/rosmaster_bringup:/opt/ros/humble PYTHONPATH=/home/wens/ugv_ws/build/rosmaster_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wens/ugv_ws/install/rosmaster_bringup/lib/python3.10/site-packages:/home/wens/ugv_ws/build/rosmaster_description:/home/wens/ugv_ws/install/rosmaster_description/lib/python3.10/site-packages:/home/wens/ugv_ws/build/rosmaster_base_package:/home/wens/ugv_ws/install/rosmaster_base_package/lib/python3.10/site-packages:/home/wens/ugv_ws/build/yahboomcar_ctrl:/home/wens/ugv_ws/install/yahboomcar_ctrl/lib/python3.10/site-packages:/home/wens/ugv_ws/build/rosmaster_bringup:/home/wens/ugv_ws/install/rosmaster_bringup/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/wens/ugv_ws/build/rosmaster_bringup/build --no-deps symlink_data
+[8.060s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wens/ugv_ws/build/rosmaster_bringup/share/rosmaster_bringup/hook/pythonpath_develop.dsv'
+[8.061s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/build/rosmaster_bringup/share/rosmaster_bringup/hook/pythonpath_develop.sh'
+[8.064s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_bringup' for CMake module files
+[8.065s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_bringup' for CMake config files
+[8.066s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_bringup/lib'
+[8.066s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_bringup/bin'
+[8.066s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_bringup/lib/pkgconfig/rosmaster_bringup.pc'
+[8.067s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_bringup/lib/python3.10/site-packages'
+[8.067s] Level 1:colcon.colcon_core.shell:create_environment_hook('rosmaster_bringup', 'pythonpath')
+[8.068s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/rosmaster_bringup/share/rosmaster_bringup/hook/pythonpath.ps1'
+[8.069s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/wens/ugv_ws/install/rosmaster_bringup/share/rosmaster_bringup/hook/pythonpath.dsv'
+[8.070s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/wens/ugv_ws/install/rosmaster_bringup/share/rosmaster_bringup/hook/pythonpath.sh'
+[8.072s] Level 1:colcon.colcon_core.environment:checking '/home/wens/ugv_ws/install/rosmaster_bringup/bin'
+[8.073s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rosmaster_bringup)
+[8.074s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/rosmaster_bringup/share/rosmaster_bringup/package.ps1'
+[8.076s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/wens/ugv_ws/install/rosmaster_bringup/share/rosmaster_bringup/package.dsv'
+[8.078s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/rosmaster_bringup/share/rosmaster_bringup/package.sh'
+[8.079s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/rosmaster_bringup/share/rosmaster_bringup/package.bash'
+[8.080s] INFO:colcon.colcon_core.shell:Creating package script '/home/wens/ugv_ws/install/rosmaster_bringup/share/rosmaster_bringup/package.zsh'
+[8.081s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/wens/ugv_ws/install/rosmaster_bringup/share/colcon-core/packages/rosmaster_bringup)
+[8.082s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[8.083s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[8.083s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[8.083s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[8.102s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[8.103s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[8.103s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[8.143s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[8.144s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/wens/ugv_ws/install/local_setup.ps1'
+[8.147s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/wens/ugv_ws/install/_local_setup_util_ps1.py'
+[8.152s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/wens/ugv_ws/install/setup.ps1'
+[8.156s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/wens/ugv_ws/install/local_setup.sh'
+[8.157s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/wens/ugv_ws/install/_local_setup_util_sh.py'
+[8.159s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/wens/ugv_ws/install/setup.sh'
+[8.163s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/wens/ugv_ws/install/local_setup.bash'
+[8.165s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/wens/ugv_ws/install/setup.bash'
+[8.168s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/wens/ugv_ws/install/local_setup.zsh'
+[8.169s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/wens/ugv_ws/install/setup.zsh'

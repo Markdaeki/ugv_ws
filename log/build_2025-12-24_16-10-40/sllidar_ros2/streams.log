@@ -1,0 +1,52 @@
+[1.388s] Invoking command in '/home/wens/ugv_ws/build/sllidar_ros2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/wens/ugv_ws/install/yahboomcar_ctrl:/home/wens/ugv_ws/install/rosmaster_bringup:/home/wens/ugv_ws/install/rosmaster_description:/home/wens/ugv_ws/install/rosmaster_base_package:/opt/ros/humble /usr/bin/cmake --build /home/wens/ugv_ws/build/sllidar_ros2 -- -j6 -l6
+[1.537s] [ 25%] Built target sllidar_client
+[1.537s] [100%] Built target sllidar_node
+[2.105s] Invoked command in '/home/wens/ugv_ws/build/sllidar_ros2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/wens/ugv_ws/install/yahboomcar_ctrl:/home/wens/ugv_ws/install/rosmaster_bringup:/home/wens/ugv_ws/install/rosmaster_description:/home/wens/ugv_ws/install/rosmaster_base_package:/opt/ros/humble /usr/bin/cmake --build /home/wens/ugv_ws/build/sllidar_ros2 -- -j6 -l6
+[2.132s] Invoking command in '/home/wens/ugv_ws/build/sllidar_ros2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/wens/ugv_ws/install/yahboomcar_ctrl:/home/wens/ugv_ws/install/rosmaster_bringup:/home/wens/ugv_ws/install/rosmaster_description:/home/wens/ugv_ws/install/rosmaster_base_package:/opt/ros/humble /usr/bin/cmake --install /home/wens/ugv_ws/build/sllidar_ros2
+[2.156s] -- Install configuration: ""
+[2.157s] -- Execute custom install script
+[2.158s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a1_launch.py
+[2.158s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a2m12_launch .py
+[2.158s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a2m7_launch.py
+[2.159s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a2m8_launch.py
+[2.159s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a3_launch.py
+[2.159s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_c1_launch.py
+[2.159s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s1_launch.py
+[2.160s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s1_tcp_launch.py
+[2.160s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s2_launch.py
+[2.160s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s2e_launch.py
+[2.160s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s3_launch.py
+[2.160s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_t1_launch.py
+[2.161s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a1_launch.py
+[2.161s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a2m12_launch.py
+[2.161s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a2m7_launch.py
+[2.161s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a2m8_launch.py
+[2.161s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a3_launch.py
+[2.162s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_c1_launch.py
+[2.162s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s1_launch.py
+[2.162s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s1_tcp_launch.py
+[2.162s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s2_launch.py
+[2.162s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s2e_launch.py
+[2.163s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s3_launch.py
+[2.163s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_t1_launch.py
+[2.163s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/rviz/sllidar_ros2.rviz
+[2.164s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/lib/sllidar_ros2/sllidar_node
+[2.164s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/lib/sllidar_ros2/sllidar_client
+[2.164s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/ament_index/resource_index/package_run_dependencies/sllidar_ros2
+[2.165s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/ament_index/resource_index/parent_prefix_path/sllidar_ros2
+[2.165s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/environment/ament_prefix_path.sh
+[2.165s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/environment/ament_prefix_path.dsv
+[2.166s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/environment/path.sh
+[2.166s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/environment/path.dsv
+[2.166s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/local_setup.bash
+[2.166s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/local_setup.sh
+[2.167s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/local_setup.zsh
+[2.167s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/local_setup.dsv
+[2.167s] -- Symlinking: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/package.dsv
+[2.196s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/ament_index/resource_index/packages/sllidar_ros2
+[2.196s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/cmake/ament_cmake_export_dependencies-extras.cmake
+[2.197s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/cmake/ament_cmake_export_include_directories-extras.cmake
+[2.197s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/cmake/sllidar_ros2Config.cmake
+[2.197s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/cmake/sllidar_ros2Config-version.cmake
+[2.197s] -- Up-to-date symlink: /home/wens/ugv_ws/install/sllidar_ros2/share/sllidar_ros2/package.xml
+[2.202s] Invoked command in '/home/wens/ugv_ws/build/sllidar_ros2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/wens/ugv_ws/install/yahboomcar_ctrl:/home/wens/ugv_ws/install/rosmaster_bringup:/home/wens/ugv_ws/install/rosmaster_description:/home/wens/ugv_ws/install/rosmaster_base_package:/opt/ros/humble /usr/bin/cmake --install /home/wens/ugv_ws/build/sllidar_ros2

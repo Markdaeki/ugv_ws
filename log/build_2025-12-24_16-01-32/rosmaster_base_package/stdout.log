@@ -1,0 +1,15 @@
+running develop
+running egg_info
+writing rosmaster_base_package.egg-info/PKG-INFO
+writing dependency_links to rosmaster_base_package.egg-info/dependency_links.txt
+writing entry points to rosmaster_base_package.egg-info/entry_points.txt
+writing requirements to rosmaster_base_package.egg-info/requires.txt
+writing top-level names to rosmaster_base_package.egg-info/top_level.txt
+reading manifest file 'rosmaster_base_package.egg-info/SOURCES.txt'
+writing manifest file 'rosmaster_base_package.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/wens/ugv_ws/install/rosmaster_base_package/lib/python3.10/site-packages/rosmaster-base-package.egg-link (link to .)
+Installing rosmaster_base_node script to /home/wens/ugv_ws/install/rosmaster_base_package/lib/rosmaster_base_package
+
+Installed /home/wens/ugv_ws/build/rosmaster_base_package
+running symlink_data

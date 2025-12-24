@@ -1,0 +1,16 @@
+[2.984s] Invoking command in '/home/wens/ugv_ws/build/rosmaster_description': PYTHONPATH=/home/wens/ugv_ws/build/rosmaster_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wens/ugv_ws/install/rosmaster_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/wens/ugv_ws/build/rosmaster_description/build --no-deps symlink_data
+[3.620s] running develop
+[4.020s] running egg_info
+[4.020s] writing rosmaster_description.egg-info/PKG-INFO
+[4.021s] writing dependency_links to rosmaster_description.egg-info/dependency_links.txt
+[4.021s] writing entry points to rosmaster_description.egg-info/entry_points.txt
+[4.021s] writing requirements to rosmaster_description.egg-info/requires.txt
+[4.021s] writing top-level names to rosmaster_description.egg-info/top_level.txt
+[4.026s] reading manifest file 'rosmaster_description.egg-info/SOURCES.txt'
+[4.027s] writing manifest file 'rosmaster_description.egg-info/SOURCES.txt'
+[4.031s] running build_ext
+[4.031s] Creating /home/wens/ugv_ws/install/rosmaster_description/lib/python3.10/site-packages/rosmaster-description.egg-link (link to .)
+[4.033s] 
+[4.033s] Installed /home/wens/ugv_ws/build/rosmaster_description
+[4.034s] running symlink_data
+[4.130s] Invoked command in '/home/wens/ugv_ws/build/rosmaster_description' returned '0': PYTHONPATH=/home/wens/ugv_ws/build/rosmaster_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wens/ugv_ws/install/rosmaster_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/wens/ugv_ws/build/rosmaster_description/build --no-deps symlink_data
