@@ -16,7 +16,7 @@ class RosmasterBaseNode(Node):
         super().__init__('rosmaster_base_node')
 
         # ===== 파라미터 =====
-        self.declare_parameter('wheel_radius', 0.095)      # 바퀴 반지름 (m)
+        self.declare_parameter('wheel_radius', 0.100)      # 바퀴 반지름 (m)
         self.declare_parameter('track_width', 0.483)       # 좌/우 바퀴 간 거리 (m)
         self.declare_parameter('ticks_per_rev', 8896.0)    # 바퀴 1회전당 엔코더 tick 수
         self.declare_parameter('imu_link', 'imu_link')
