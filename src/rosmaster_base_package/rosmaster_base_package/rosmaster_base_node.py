@@ -25,7 +25,7 @@ class RosmasterBaseNode(Node):
         # 엔코더 tick 부호 (전진 시 tick 이 증가면 1.0, 감소면 -1.0)
         self.declare_parameter('enc_sign', -1.0)
         # 회전량 보정 계수 (실측 대비 과대/과소 회전을 맞추기 위해 기본 0.8 적용)
-        self.declare_parameter('yaw_scale', 0.8)
+        self.declare_parameter('yaw_scale', 1.0)
 
         self.wheel_radius = float(self.get_parameter('wheel_radius').value)
         self.track_width = float(self.get_parameter('track_width').value)
