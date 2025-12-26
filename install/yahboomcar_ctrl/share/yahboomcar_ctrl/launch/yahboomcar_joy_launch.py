@@ -1,1 +1,0 @@
-/home/wens/ugv_ws/build/yahboomcar_ctrl/launch/yahboomcar_joy_launch.py

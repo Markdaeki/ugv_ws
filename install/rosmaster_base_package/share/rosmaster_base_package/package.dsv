@@ -1,9 +1,0 @@
-source;share/rosmaster_base_package/hook/pythonpath.ps1
-source;share/rosmaster_base_package/hook/pythonpath.dsv
-source;share/rosmaster_base_package/hook/pythonpath.sh
-source;share/rosmaster_base_package/hook/ament_prefix_path.ps1
-source;share/rosmaster_base_package/hook/ament_prefix_path.dsv
-source;share/rosmaster_base_package/hook/ament_prefix_path.sh
-source;../../build/rosmaster_base_package/share/rosmaster_base_package/hook/pythonpath_develop.ps1
-source;../../build/rosmaster_base_package/share/rosmaster_base_package/hook/pythonpath_develop.dsv
-source;../../build/rosmaster_base_package/share/rosmaster_base_package/hook/pythonpath_develop.sh
