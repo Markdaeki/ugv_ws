@@ -35,7 +35,7 @@ def generate_launch_description():
             # 'track_width': 0.60375,
             # 'ticks_per_rev': 8896.0,
             # 'enc_sign': -1.0,
-            'yaw_scale': 0.8,  # 실측 360도 회전에 RViz 450도 -> 0.8로 보정
+            #'yaw_scale': 0.8,  # 실측 360도 회전에 RViz 450도 -> 0.8로 보정
         }]
     )
 
