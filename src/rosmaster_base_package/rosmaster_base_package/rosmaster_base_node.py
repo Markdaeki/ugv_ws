@@ -12,6 +12,21 @@ from Rosmaster_Lib import Rosmaster
 
 
 class RosmasterBaseNode(Node):
+    @staticmethod
+    def euler_to_quaternion(roll: float, pitch: float, yaw: float):
+        cr = math.cos(0.5 * roll)
+        sr = math.sin(0.5 * roll)
+        cp = math.cos(0.5 * pitch)
+        sp = math.sin(0.5 * pitch)
+        cy = math.cos(0.5 * yaw)
+        sy = math.sin(0.5 * yaw)
+
+        qx = sr * cp * cy - cr * sp * sy
+        qy = cr * sp * cy + sr * cp * sy
+        qz = cr * cp * sy - sr * sp * cy
+        qw = cr * cp * cy + sr * sp * sy
+        return qx, qy, qz, qw
+
     def __init__(self):
         super().__init__('rosmaster_base_node')
 
@@ -26,6 +41,8 @@ class RosmasterBaseNode(Node):
         self.declare_parameter('enc_sign', -1.0)
         # 회전량 보정 계수 (실측 대비 과대/과소 회전을 맞추기 위해 기본 0.8 적용)
         self.declare_parameter('yaw_scale', 0.725)
+        # EKF를 사용할 경우 odom->base TF는 EKF에서 브로드캐스트하도록 옵션 제공
+        self.declare_parameter('publish_odom_tf', True)
 
         self.wheel_radius = float(self.get_parameter('wheel_radius').value)
         self.track_width = float(self.get_parameter('track_width').value)
@@ -35,13 +52,15 @@ class RosmasterBaseNode(Node):
         self.odom_frame = self.get_parameter('odom_frame').value
         self.enc_sign = float(self.get_parameter('enc_sign').value)
         self.yaw_scale = float(self.get_parameter('yaw_scale').value)
+        self.publish_odom_tf = bool(self.get_parameter('publish_odom_tf').value)
 
         self.get_logger().info(
             f"wheel_radius={self.wheel_radius}, "
             f"track_width={self.track_width}, "
             f"ticks_per_rev={self.ticks_per_rev}, "
             f"enc_sign={self.enc_sign}, "
-            f"yaw_scale={self.yaw_scale}"
+            f"yaw_scale={self.yaw_scale}, "
+            f"publish_odom_tf={self.publish_odom_tf}"
         )
 
         # ===== Rosmaster 보드 초기화 =====
@@ -69,6 +88,9 @@ class RosmasterBaseNode(Node):
         self.x = 0.0
         self.y = 0.0
         self.yaw = 0.0
+        # IMU yaw 적분(gyroscope 기반 orientation)
+        self.imu_yaw = 0.0
+        self.last_time = None
 
         # ===== ROS 통신 =====
         self.cmd_sub = self.create_subscription(
@@ -98,7 +120,15 @@ class RosmasterBaseNode(Node):
 
     # ========== 주기 업데이트 ==========
     def update(self):
-        now = self.get_clock().now().to_msg()
+        now_time = self.get_clock().now()
+        now = now_time.to_msg()
+        if self.last_time is None:
+            dt = self.dt
+        else:
+            dt = (now_time - self.last_time).nanoseconds * 1.0e-9
+            if dt <= 0.0:
+                dt = self.dt
+        self.last_time = now_time
 
         # ---- IMU, MAG, 배터리 ----
         ax, ay, az = self.car.get_accelerometer_data()
@@ -109,12 +139,29 @@ class RosmasterBaseNode(Node):
         imu = Imu()
         imu.header.stamp = now
         imu.header.frame_id = self.imu_link
+        # gyro Z 적분으로 yaw orientation 추정 (roll/pitch는 0 가정)
+        self.imu_yaw += float(gz) * dt
+        qx, qy, qz, qw = self.euler_to_quaternion(0.0, 0.0, self.imu_yaw)
+        imu.orientation.x = float(qx)
+        imu.orientation.y = float(qy)
+        imu.orientation.z = float(qz)
+        imu.orientation.w = float(qw)
+        imu.orientation_covariance = [
+            1e-3, 0.0, 0.0,
+            0.0, 1e-3, 0.0,
+            0.0, 0.0, 5e-2,
+        ]
         imu.linear_acceleration.x = float(ax)
         imu.linear_acceleration.y = float(ay)
         imu.linear_acceleration.z = float(az)
         imu.angular_velocity.x = float(gx)
         imu.angular_velocity.y = float(gy)
         imu.angular_velocity.z = float(gz)
+        imu.angular_velocity_covariance = [
+            1e-3, 0.0, 0.0,
+            0.0, 1e-3, 0.0,
+            0.0, 0.0, 1e-2,
+        ]
         self.imu_pub.publish(imu)
 
         mag = MagneticField()
@@ -196,24 +243,25 @@ class RosmasterBaseNode(Node):
         odom.pose.pose.orientation.z = float(sy)
         odom.pose.pose.orientation.w = float(cy)
 
-        odom.twist.twist.linear.x = float(ds / self.dt)
+        odom.twist.twist.linear.x = float(ds / dt)
         odom.twist.twist.linear.y = 0.0
-        odom.twist.twist.angular.z = float(dtheta / self.dt)
+        odom.twist.twist.angular.z = float(dtheta / dt)
         self.odom_pub.publish(odom)
 
         # ----- TF (odom → base_footprint) -----
-        t = TransformStamped()
-        t.header.stamp = now
-        t.header.frame_id = self.odom_frame
-        t.child_frame_id = self.base_frame
-        t.transform.translation.x = float(self.x)
-        t.transform.translation.y = float(self.y)
-        t.transform.translation.z = 0.0
-        t.transform.rotation.x = 0.0
-        t.transform.rotation.y = 0.0
-        t.transform.rotation.z = float(sy)
-        t.transform.rotation.w = float(cy)
-        self.tf_broadcaster.sendTransform(t)
+        if self.publish_odom_tf:
+            t = TransformStamped()
+            t.header.stamp = now
+            t.header.frame_id = self.odom_frame
+            t.child_frame_id = self.base_frame
+            t.transform.translation.x = float(self.x)
+            t.transform.translation.y = float(self.y)
+            t.transform.translation.z = 0.0
+            t.transform.rotation.x = 0.0
+            t.transform.rotation.y = 0.0
+            t.transform.rotation.z = float(sy)
+            t.transform.rotation.w = float(cy)
+            self.tf_broadcaster.sendTransform(t)
 
         # ===== JointState (바퀴 회전 각도) =====
         # 각 바퀴: 이동거리 / 반지름 → 회전각(rad)

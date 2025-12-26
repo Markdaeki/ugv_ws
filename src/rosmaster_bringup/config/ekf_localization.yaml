@@ -3,7 +3,7 @@ ekf_filter_node:
     frequency: 50.0
     sensor_timeout: 0.1
     two_d_mode: true
-    publish_tf: false
+    publish_tf: true
 
     map_frame: map
     odom_frame: odom
@@ -17,7 +17,7 @@ ekf_filter_node:
     # -------------------------
     imu0: imu/data_raw
     imu0_config: [false, false, false,
-                  false, false, false,
+                  false, false, true,   # yaw (orientation)
                   false, false, false,
                   false, false, true,   # yaw rate (vyaw)
                   false, false, false]  # linear accel은 기본 OFF(필요 시 켜세요)

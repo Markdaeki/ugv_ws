@@ -14,6 +14,7 @@ def generate_launch_description():
     urdf_file = PathJoinSubstitution([pkg_desc, 'urdf', 'ugv.urdf.xacro'])
     ekf_config = PathJoinSubstitution([pkg_bringup, 'config', 'ekf_localization.yaml'])
     use_ekf = LaunchConfiguration('use_ekf', default='true')
+    publish_base_tf = LaunchConfiguration('publish_base_tf', default='false')
 
     robot_state_publisher = Node(
         package='robot_state_publisher',
@@ -41,6 +42,7 @@ def generate_launch_description():
             # 'ticks_per_rev': 8896.0,
             # 'enc_sign': -1.0,
             #'yaw_scale': 0.8,  # 실측 360도 회전에 RViz 450도 -> 0.8로 보정
+            'publish_odom_tf': publish_base_tf,
         }]
     )
 
@@ -110,6 +112,11 @@ def generate_launch_description():
             'use_ekf',
             default_value='true',
             description='IMU와 휠 오dom을 EKF로 융합할지 여부'
+        ),
+        DeclareLaunchArgument(
+            'publish_base_tf',
+            default_value='false',
+            description='베이스 노드에서 odom->base TF를 퍼블리시할지 여부(EKF 사용 시 false 권장)'
         ),
         robot_state_publisher,
         base_node,
