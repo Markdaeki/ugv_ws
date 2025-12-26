@@ -28,3 +28,4 @@ ros2 launch rosmaster_bringup ugv_bringup.launch.py use_ekf:=false
 - 출력: `/odometry/filtered` (EKF 융합 결과)
 
 Rviz에서 `odometry/filtered`를 시각화하고 `/imu/data_raw`와 `/odom`이 정상적으로 들어오는지 확인하면 됩니다. 필요하면 EKF 파라미터를 조정해도 됩니다(예: `imu0_remove_gravitational_acceleration`, 잡음 공분산 등).
+dd
