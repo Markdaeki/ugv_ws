@@ -1,7 +1,7 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.conditions import IfCondition
-from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitution, PythonExpression
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.parameter_descriptions import ParameterValue
@@ -14,8 +14,9 @@ def generate_launch_description():
     urdf_file = PathJoinSubstitution([pkg_desc, 'urdf', 'ugv.urdf.xacro'])
     ekf_config = PathJoinSubstitution([pkg_bringup, 'config', 'ekf_localization.yaml'])
     use_ekf = LaunchConfiguration('use_ekf', default='true')
-    # 업계 표준: TF는 EKF 하나만 발행. EKF를 끄는 특수 상황에서만 베이스 TF를 켜도록 기본값 false.
-    publish_base_tf = LaunchConfiguration('publish_base_tf', default='false')
+    # EKF를 끌 때 odom->base TF가 사라지지 않도록 기본값을 use_ekf의 반대 값으로 설정
+    publish_base_tf_default = PythonExpression(['"true" if not ', use_ekf, ' else "false"'])
+    publish_base_tf = LaunchConfiguration('publish_base_tf', default=publish_base_tf_default)
 
     robot_state_publisher = Node(
         package='robot_state_publisher',
@@ -43,7 +44,7 @@ def generate_launch_description():
             # 'ticks_per_rev': 8896.0,
             # 'enc_sign': -1.0,
             #'yaw_scale': 0.8,  # 실측 360도 회전에 RViz 450도 -> 0.8로 보정
-            'publish_odom_tf': publish_base_tf,
+            'publish_odom_tf': ParameterValue(publish_base_tf, value_type=bool),
         }]
     )
 
@@ -116,8 +117,8 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             'publish_base_tf',
-            default_value='false',
-            description='EKF를 끌 때만 베이스 노드가 odom->base TF를 퍼블리시하도록 전환'
+            default_value=publish_base_tf_default,
+            description='EKF를 끌 때 베이스 노드가 odom->base TF를 퍼블리시하도록 자동 전환'
         ),
         robot_state_publisher,
         base_node,
