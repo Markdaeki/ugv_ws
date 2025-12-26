@@ -1,6 +1,8 @@
 from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument
+from launch.conditions import IfCondition
+from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
-from launch.substitutions import Command, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.parameter_descriptions import ParameterValue
 
@@ -8,7 +10,10 @@ from launch_ros.parameter_descriptions import ParameterValue
 def generate_launch_description():
     # === 1) URDF 로딩 (rosmaster_description) ===
     pkg_desc = FindPackageShare('rosmaster_description').find('rosmaster_description')
+    pkg_bringup = FindPackageShare('rosmaster_bringup').find('rosmaster_bringup')
     urdf_file = PathJoinSubstitution([pkg_desc, 'urdf', 'ugv.urdf.xacro'])
+    ekf_config = PathJoinSubstitution([pkg_bringup, 'config', 'ekf_localization.yaml'])
+    use_ekf = LaunchConfiguration('use_ekf', default='true')
 
     robot_state_publisher = Node(
         package='robot_state_publisher',
@@ -86,12 +91,31 @@ def generate_launch_description():
         }]
     )
 
+    ekf_localization_node = Node(
+        package='robot_localization',
+        executable='ekf_node',
+        name='ekf_localization',
+        output='screen',
+        parameters=[ekf_config],
+        remappings=[
+            ('imu/data', '/imu/data_raw'),
+            ('odometry/filtered', '/odometry/filtered'),
+        ],
+        condition=IfCondition(use_ekf),
+    )
+
 
     return LaunchDescription([
+        DeclareLaunchArgument(
+            'use_ekf',
+            default_value='true',
+            description='IMU와 휠 오dom을 EKF로 융합할지 여부'
+        ),
         robot_state_publisher,
         base_node,
         usb_cam_node,
         lidar_node,
         scan_filter_node,
+        ekf_localization_node,
     ])
 
