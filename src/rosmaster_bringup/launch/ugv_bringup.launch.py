@@ -15,7 +15,15 @@ def generate_launch_description():
     ekf_config = PathJoinSubstitution([pkg_bringup, 'config', 'ekf_localization.yaml'])
     use_ekf = LaunchConfiguration('use_ekf', default='true')
     # EKF를 끌 때 odom->base TF가 사라지지 않도록 기본값을 use_ekf의 반대 값으로 설정
+<<<<<<< ours
     publish_base_tf_default = PythonExpression(['"true" if not ', use_ekf, ' else "false"'])
+=======
+    publish_base_tf_default = PythonExpression([
+        "not ('",
+        use_ekf,
+        "').lower() == 'true'",
+    ])
+>>>>>>> theirs
     publish_base_tf = LaunchConfiguration('publish_base_tf', default=publish_base_tf_default)
 
     robot_state_publisher = Node(
