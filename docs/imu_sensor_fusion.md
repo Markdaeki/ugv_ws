@@ -9,7 +9,7 @@
 ## 2. EKF 설정 파일
 `rosmaster_bringup/config/ekf_localization.yaml`에 EKF 노드 설정을 추가했습니다.
 - IMU는 `imu/data_raw`에서 **각속도 + 선가속도**를 사용하도록 `imu0_config`를 구성했습니다.
-- 휠 오dom(`odom`)은 **평면(x, y) 위치와 yaw**를 사용하도록 `odom0_config`를 구성했고, 누적 오dom을 델타로 처리하도록 `odom0_differential: true`를 켰습니다.
+- 휠 오dom(`odom`)은 **평면(x, y) 위치·yaw**에 더해 **직선 속도(vx)와 yaw rate**까지 사용하도록 `odom0_config`를 켰습니다. 이미 휠 오dom이 적분된 포즈를 내보내므로 `odom0_differential`은 끕니다.
 - 2D 지면 주행을 가정해 `two_d_mode: true`를 켰고, 기존 TF와 충돌하지 않도록 `publish_tf: false`로 설정했습니다. 융합된 포즈는 `odometry/filtered` 토픽에서 읽을 수 있습니다.
 
 ## 3. 실행 방법

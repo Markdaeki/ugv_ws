@@ -6,45 +6,37 @@ ekf_filter_node:
     publish_tf: false
 
     map_frame: map
-    odom_frame: odomㅇ
+    odom_frame: odom
     base_link_frame: base_footprint
     world_frame: odom
 
-    # 센서 입력
-    imu0: imu/data_raw
+    # -------------------------
+    # IMU (일반적으로 imu/data 사용 권장)
+    # - IMU가 orientation(자세)을 제대로 제공하지 않는 경우가 많아서
+    #   yaw(orientation)는 끄고 yaw rate(gyro z)만 쓰는 구성이 안전합니다.
+    # -------------------------
+    imu0: imu/data
     imu0_config: [false, false, false,
-                  false, false, true,
                   false, false, false,
                   false, false, false,
-                  false, false, false]
+                  false, false, true,   # yaw rate (vyaw)
+                  false, false, false]  # linear accel은 기본 OFF(필요 시 켜세요)
     imu0_differential: false
     imu0_queue_size: 10
     imu0_remove_gravitational_acceleration: true
 
+    # -------------------------
+    # Wheel Odometry (twist 사용: vx, vyaw)
+    # - 일반적인 diff-drive는 vy는 사용 안 함
+    # -------------------------
     odom0: odom
-    odom0_config: [true, true, false,
-                   false, false, false,
-                   false, false, false,
-                   false, false, false,
-                   false, false, false]
+    odom0_config: [false, false, false,  # x, y, z
+                   false, false, false,  # roll, pitch, yaw
+                   true,  false, false,  # vx, vy, vz
+                   false, false, true,   # vroll, vpitch, vyaw
+                   false, false, false]  # ax, ay, az
     odom0_queue_size: 10
-    odom0_differential: true
+    odom0_differential: false
 
-    # 초기 공분산 (15x15, 모든 항을 부동소수점으로 명시)
-    initial_estimate_covariance: [
-                                  0.001, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-                                  0.0, 0.001, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-                                  0.0, 0.0, 1000000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-                                  0.0, 0.0, 0.0, 0.001, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-                                  0.0, 0.0, 0.0, 0.0, 0.001, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-                                  0.0, 0.0, 0.0, 0.0, 0.0, 0.001, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-                                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-                                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-                                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1000000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-                                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0, 0.0,
-                                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.0, 0.0,
-                                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1000000.0, 0.0, 0.0, 0.0, 0.0,
-                                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.0, 0.0, 0.0,
-                                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.0, 0.0,
-                                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1000000.0, 0.0
-                                 ]
+    # 초기 공분산은 기본값 사용 권장(수동 15x15는 실수 위험이 큼)
+    # initial_estimate_covariance: [...]
