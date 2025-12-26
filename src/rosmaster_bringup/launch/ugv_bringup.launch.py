@@ -14,6 +14,7 @@ def generate_launch_description():
     urdf_file = PathJoinSubstitution([pkg_desc, 'urdf', 'ugv.urdf.xacro'])
     ekf_config = PathJoinSubstitution([pkg_bringup, 'config', 'ekf_localization.yaml'])
     use_ekf = LaunchConfiguration('use_ekf', default='true')
+    # 업계 표준: TF는 EKF 하나만 발행. EKF를 끄는 특수 상황에서만 베이스 TF를 켜도록 기본값 false.
     publish_base_tf = LaunchConfiguration('publish_base_tf', default='false')
 
     robot_state_publisher = Node(
@@ -116,7 +117,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'publish_base_tf',
             default_value='false',
-            description='베이스 노드에서 odom->base TF를 퍼블리시할지 여부(EKF 사용 시 false 권장)'
+            description='EKF를 끌 때만 베이스 노드가 odom->base TF를 퍼블리시하도록 전환'
         ),
         robot_state_publisher,
         base_node,
