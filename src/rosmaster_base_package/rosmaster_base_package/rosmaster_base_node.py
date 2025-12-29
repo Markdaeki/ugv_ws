@@ -43,6 +43,10 @@ class RosmasterBaseNode(Node):
         self.declare_parameter('yaw_scale', 0.765)
         # EKF를 사용할 경우 odom->base TF는 EKF에서 브로드캐스트하도록 옵션 제공
         self.declare_parameter('publish_odom_tf', True)
+        # 공분산 설정 (yaw는 IMU를 더 신뢰)
+        self.declare_parameter('imu_gyro_z_cov', 1.0e-2)
+        # 기본적으로 엔코더 vyaw는 IMU보다 200배 큰 공분산 적용
+        self.declare_parameter('encoder_vyaw_cov', 2.0)
         
                 # ====== set_motor 기반 속도제어 파라미터 ======
         # PWM=100일 때의 실측 최대 선속도(m/s). (대략값으로 시작해도 됨)
@@ -78,6 +82,8 @@ class RosmasterBaseNode(Node):
         self.enc_sign = float(self.get_parameter('enc_sign').value)
         self.yaw_scale = float(self.get_parameter('yaw_scale').value)
         self.publish_odom_tf = bool(self.get_parameter('publish_odom_tf').value)
+        self.imu_gyro_z_cov = float(self.get_parameter('imu_gyro_z_cov').value)
+        self.encoder_vyaw_cov = float(self.get_parameter('encoder_vyaw_cov').value)
 
         self.get_logger().info(
             f"wheel_radius={self.wheel_radius}, "
@@ -85,7 +91,9 @@ class RosmasterBaseNode(Node):
             f"ticks_per_rev={self.ticks_per_rev}, "
             f"enc_sign={self.enc_sign}, "
             f"yaw_scale={self.yaw_scale}, "
-            f"publish_odom_tf={self.publish_odom_tf}"
+            f"publish_odom_tf={self.publish_odom_tf}, "
+            f"imu_gyro_z_cov={self.imu_gyro_z_cov}, "
+            f"encoder_vyaw_cov={self.encoder_vyaw_cov}"
         )
 
         # ===== Rosmaster 보드 초기화 =====
@@ -217,7 +225,7 @@ class RosmasterBaseNode(Node):
         imu.angular_velocity_covariance = [
             1e-3, 0.0, 0.0,
             0.0, 1e-3, 0.0,
-            0.0, 0.0, 1e-2,
+            0.0, 0.0, float(self.imu_gyro_z_cov),
         ]
         self.imu_pub.publish(imu)
 
@@ -303,6 +311,14 @@ class RosmasterBaseNode(Node):
         odom.twist.twist.linear.x = float(ds / dt)
         odom.twist.twist.linear.y = 0.0
         odom.twist.twist.angular.z = float(dtheta / dt)
+        odom.twist.covariance = [
+            1e-3, 0.0, 0.0, 0.0, 0.0, 0.0,
+            0.0, 1e-3, 0.0, 0.0, 0.0, 0.0,
+            0.0, 0.0, 1e-3, 0.0, 0.0, 0.0,
+            0.0, 0.0, 0.0, 1e-3, 0.0, 0.0,
+            0.0, 0.0, 0.0, 0.0, 1e-3, 0.0,
+            0.0, 0.0, 0.0, 0.0, 0.0, float(self.encoder_vyaw_cov),
+        ]
         self.odom_pub.publish(odom)
 
         # ----- TF (odom → base_footprint) -----
