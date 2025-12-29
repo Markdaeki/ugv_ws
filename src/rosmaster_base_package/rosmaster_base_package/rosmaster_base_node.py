@@ -43,6 +43,29 @@ class RosmasterBaseNode(Node):
         self.declare_parameter('yaw_scale', 0.725)
         # EKF를 사용할 경우 odom->base TF는 EKF에서 브로드캐스트하도록 옵션 제공
         self.declare_parameter('publish_odom_tf', True)
+        
+                # ====== set_motor 기반 속도제어 파라미터 ======
+        # PWM=100일 때의 실측 최대 선속도(m/s). (대략값으로 시작해도 됨)
+        self.declare_parameter('max_vx', 1.0)
+        # PWM 변화율 제한 (부드러운 가감속): 초당 PWM 변화량
+        self.declare_parameter('pwm_slew_rate', 80.0)
+        # 모터 방향이 반대면 -1.0으로 뒤집기 (좌/우 각각)
+        self.declare_parameter('motor_sign_left', 1.0)
+        self.declare_parameter('motor_sign_right', 1.0)
+
+        self.max_vx = float(self.get_parameter('max_vx').value)
+        self.pwm_slew_rate = float(self.get_parameter('pwm_slew_rate').value)
+        self.motor_sign_left = float(self.get_parameter('motor_sign_left').value)
+        self.motor_sign_right = float(self.get_parameter('motor_sign_right').value)
+
+        # cmd_vel 목표값 저장(콜백에서 저장만 하고, update에서 모터 구동)
+        self.cmd_vx = 0.0
+        self.cmd_wz = 0.0
+
+        # 현재 PWM(램프 적용용)
+        self.pwmL = 0.0
+        self.pwmR = 0.0
+
 
         self.wheel_radius = float(self.get_parameter('wheel_radius').value)
         self.track_width = float(self.get_parameter('track_width').value)
@@ -111,12 +134,10 @@ class RosmasterBaseNode(Node):
 
     # ========== cmd_vel 콜백 ==========
     def cmd_vel_cb(self, msg: Twist):
-        # 상위에서 주는 기동 명령을 그대로 Rosmaster에 전달
-        self.car.set_car_motion(
-            float(msg.linear.x),
-            float(msg.linear.y),
-            float(msg.angular.z)
-        )
+            # set_motor 기반 제어: 목표값만 저장 (linear.y는 차동구동에서 사용 안 함)
+            self.cmd_vx = float(msg.linear.x)      # m/s
+            self.cmd_wz = float(msg.angular.z)     # rad/s
+            
 
     # ========== 주기 업데이트 ==========
     def update(self):
@@ -129,6 +150,39 @@ class RosmasterBaseNode(Node):
             if dt <= 0.0:
                 dt = self.dt
         self.last_time = now_time
+                # ====== set_motor 기반 차동구동 제어 (좌2/우2 동기) ======
+        def clamp(x, lo, hi):
+            return max(lo, min(hi, x))
+
+        def slew(current, target, rate_per_sec, dt):
+            step = rate_per_sec * dt
+            if target > current + step:
+                return current + step
+            if target < current - step:
+                return current - step
+            return target
+
+        # cmd_vel -> 좌/우 선속도 (m/s)
+        vx = self.cmd_vx
+        wz = self.cmd_wz
+        vL = vx - wz * (self.track_width / 2.0)
+        vR = vx + wz * (self.track_width / 2.0)
+
+        # 선속도 -> PWM (선형 매핑)
+        # max_vx에서 PWM=100이 되도록 스케일
+        tgtL = clamp((vL / self.max_vx) * 100.0, -100.0, 100.0)
+        tgtR = clamp((vR / self.max_vx) * 100.0, -100.0, 100.0)
+
+        # 부드러운 가감속(램프)
+        self.pwmL = slew(self.pwmL, tgtL, self.pwm_slew_rate, dt)
+        self.pwmR = slew(self.pwmR, tgtR, self.pwm_slew_rate, dt)
+
+        # 모터 방향 보정(필요하면 motor_sign_* = -1.0)
+        pwmL = int(round(self.pwmL * self.motor_sign_left))
+        pwmR = int(round(self.pwmR * self.motor_sign_right))
+
+        # 좌2/우2 동기: (m1,m2)=left, (m3,m4)=right 라고 가정
+        self.car.set_motor(pwmL, pwmL, pwmR, pwmR)
 
         # ---- IMU, MAG, 배터리 ----
         ax, ay, az = self.car.get_accelerometer_data()
