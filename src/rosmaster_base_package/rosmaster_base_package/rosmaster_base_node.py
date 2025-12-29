@@ -194,6 +194,7 @@ class RosmasterBaseNode(Node):
         # ---- IMU, MAG, 배터리 ----
         ax, ay, az = self.car.get_accelerometer_data()
         gx, gy, gz = self.car.get_gyroscope_data()
+        gz = -gz
         mx, my, mz = self.car.get_magnetometer_data()
         voltage = self.car.get_battery_voltage()
 
