@@ -31,48 +31,41 @@ class RosmasterBaseNode(Node):
         super().__init__('rosmaster_base_node')
 
         # ===== 파라미터 =====
-        self.declare_parameter('wheel_radius', 0.097)      # 바퀴 반지름 (m)
-        self.declare_parameter('track_width', 0.483)       # 좌/우 바퀴 간 거리 (m)
-        self.declare_parameter('ticks_per_rev', 8896.0)    # 바퀴 1회전당 엔코더 tick 수
+        self.declare_parameter('wheel_radius', 0.097)      # m
+        self.declare_parameter('track_width', 0.483)       # m
+        self.declare_parameter('ticks_per_rev', 8896.0)
         self.declare_parameter('imu_link', 'imu_link')
         self.declare_parameter('base_frame', 'base_footprint')
         self.declare_parameter('odom_frame', 'odom')
-        # 엔코더 tick 부호 (전진 시 tick 이 증가면 1.0, 감소면 -1.0)
         self.declare_parameter('enc_sign', -1.0)
-        # 회전량 보정 계수 (실측 대비 과대/과소 회전을 맞추기 위해 기본 0.8 적용)
         self.declare_parameter('yaw_scale', 0.765)
-        # EKF를 사용할 경우 odom->base TF는 EKF에서 브로드캐스트하도록 옵션 제공
-        self.declare_parameter('publish_odom_tf', True)
-        # 공분산 설정 (yaw는 IMU를 더 신뢰)
-        self.declare_parameter('imu_gyro_z_cov', 1.0e-2)
-        # 기본적으로 엔코더 vyaw는 IMU보다 200배 큰 공분산 적용
-        self.declare_parameter('encoder_vyaw_cov', 2.0)
-        
-                # ====== set_motor 기반 속도제어 파라미터 ======
-        # PWM=100일 때의 실측 최대 선속도(m/s). (대략값으로 시작해도 됨)
-        self.declare_parameter('max_vx', 0.61)
-        self.declare_parameter('pwm_max', 90.0)  # pwm 최대출력 
-        # PWM 변화율 제한 (부드러운 가감속): 초당 PWM 변화량
-        self.declare_parameter('pwm_slew_rate', 80.0)
-        # 모터 방향이 반대면 -1.0으로 뒤집기 (좌/우 각각)
+
+        # EKF가 publish_tf: true 라면 여기서는 False 권장 (TF 중복 방지)
+        self.declare_parameter('publish_odom_tf', False)
+
+        # ===== 공분산(표준편차, stddev) 파라미터 =====
+        # odom pose (엔코더 기반 위치/요)
+        self.declare_parameter('odom_pose_x_std', 0.02)     # m
+        self.declare_parameter('odom_pose_y_std', 0.02)     # m
+        self.declare_parameter('odom_pose_yaw_std', 0.2)    # rad (엔코더 yaw는 덜 신뢰)
+
+        # odom twist (엔코더 기반 속도)
+        self.declare_parameter('odom_twist_vx_std', 0.05)   # m/s
+        self.declare_parameter('odom_twist_wz_std', 1.0)    # rad/s (엔코더 vyaw는 덜 신뢰)
+
+        # imu gyro z
+        self.declare_parameter('imu_gyro_z_std', 0.1)       # rad/s (작을수록 더 신뢰)
+        # (orientation은 ekf에서 끌 거라서, 여기서는 큰 의미 없음)
+        self.declare_parameter('imu_orientation_yaw_std', 0.3)  # rad (사용 안 하면 큰 값도 무방)
+
+        # ====== set_motor 기반 속도제어 파라미터 ======
+        self.declare_parameter('max_vx', 0.61)          # pwm_max일 때 실측 vx
+        self.declare_parameter('pwm_max', 90.0)         # 0~90 사용
+        self.declare_parameter('pwm_slew_rate', 80.0)   # pwm/sec
         self.declare_parameter('motor_sign_left', 1.0)
         self.declare_parameter('motor_sign_right', 1.0)
 
-        self.max_vx = float(self.get_parameter('max_vx').value)
-        self.pwm_max = float(self.get_parameter('pwm_max').value)
-        self.pwm_slew_rate = float(self.get_parameter('pwm_slew_rate').value)
-        self.motor_sign_left = float(self.get_parameter('motor_sign_left').value)
-        self.motor_sign_right = float(self.get_parameter('motor_sign_right').value)
-
-        # cmd_vel 목표값 저장(콜백에서 저장만 하고, update에서 모터 구동)
-        self.cmd_vx = 0.0
-        self.cmd_wz = 0.0
-
-        # 현재 PWM(램프 적용용)
-        self.pwmL = 0.0
-        self.pwmR = 0.0
-
-
+        # ----- get params -----
         self.wheel_radius = float(self.get_parameter('wheel_radius').value)
         self.track_width = float(self.get_parameter('track_width').value)
         self.ticks_per_rev = float(self.get_parameter('ticks_per_rev').value)
@@ -82,23 +75,34 @@ class RosmasterBaseNode(Node):
         self.enc_sign = float(self.get_parameter('enc_sign').value)
         self.yaw_scale = float(self.get_parameter('yaw_scale').value)
         self.publish_odom_tf = bool(self.get_parameter('publish_odom_tf').value)
-        self.imu_gyro_z_cov = float(self.get_parameter('imu_gyro_z_cov').value)
-        self.encoder_vyaw_cov = float(self.get_parameter('encoder_vyaw_cov').value)
+
+        self.odom_pose_x_std = float(self.get_parameter('odom_pose_x_std').value)
+        self.odom_pose_y_std = float(self.get_parameter('odom_pose_y_std').value)
+        self.odom_pose_yaw_std = float(self.get_parameter('odom_pose_yaw_std').value)
+
+        self.odom_twist_vx_std = float(self.get_parameter('odom_twist_vx_std').value)
+        self.odom_twist_wz_std = float(self.get_parameter('odom_twist_wz_std').value)
+
+        self.imu_gyro_z_std = float(self.get_parameter('imu_gyro_z_std').value)
+        self.imu_orientation_yaw_std = float(self.get_parameter('imu_orientation_yaw_std').value)
+
+        self.max_vx = float(self.get_parameter('max_vx').value)
+        self.pwm_max = float(self.get_parameter('pwm_max').value)
+        self.pwm_slew_rate = float(self.get_parameter('pwm_slew_rate').value)
+        self.motor_sign_left = float(self.get_parameter('motor_sign_left').value)
+        self.motor_sign_right = float(self.get_parameter('motor_sign_right').value)
 
         self.get_logger().info(
-            f"wheel_radius={self.wheel_radius}, "
-            f"track_width={self.track_width}, "
-            f"ticks_per_rev={self.ticks_per_rev}, "
-            f"enc_sign={self.enc_sign}, "
-            f"yaw_scale={self.yaw_scale}, "
-            f"publish_odom_tf={self.publish_odom_tf}, "
-            f"imu_gyro_z_cov={self.imu_gyro_z_cov}, "
-            f"encoder_vyaw_cov={self.encoder_vyaw_cov}"
+            f"wheel_radius={self.wheel_radius}, track_width={self.track_width}, ticks_per_rev={self.ticks_per_rev}, "
+            f"enc_sign={self.enc_sign}, yaw_scale={self.yaw_scale}, publish_odom_tf={self.publish_odom_tf}\n"
+            f"odom_pose_std(x,y,yaw)=({self.odom_pose_x_std},{self.odom_pose_y_std},{self.odom_pose_yaw_std})\n"
+            f"odom_twist_std(vx,wz)=({self.odom_twist_vx_std},{self.odom_twist_wz_std}), "
+            f"imu_gyro_z_std={self.imu_gyro_z_std}"
         )
 
         # ===== Rosmaster 보드 초기화 =====
         self.car = Rosmaster()
-        self.car.set_car_type(4)  # X1
+        self.car.set_car_type(4)  # 4륜 차동
 
         try:
             self.car.create_receive_threading()
@@ -107,28 +111,29 @@ class RosmasterBaseNode(Node):
             self.get_logger().error(f"create_receive_threading failed: {e}")
 
         try:
-            # 상태 자동 리포트 (속도/IMU/엔코더 등)
             self.car.set_auto_report_state(True, False)
         except Exception as e:
             self.get_logger().warn(f"set_auto_report_state failed: {e}")
 
         # ===== 상태 변수 =====
-        self.prev_enc = None          # 이전 엔코더 값 (m1, m2, m3, m4)
-        # 휠 각도 (rad) 순서: FR, FL, BR, BL (joint 이름 순서와 맞춤)
+        self.prev_enc = None
         self.wheel_angles = [0.0, 0.0, 0.0, 0.0]
 
-        # odom 상에서의 로봇 자세
         self.x = 0.0
         self.y = 0.0
         self.yaw = 0.0
-        # IMU yaw 적분(gyroscope 기반 orientation)
+
         self.imu_yaw = 0.0
         self.last_time = None
 
+        # cmd_vel 목표값 저장
+        self.cmd_vx = 0.0
+        self.cmd_wz = 0.0
+        self.pwmL = 0.0
+        self.pwmR = 0.0
+
         # ===== ROS 통신 =====
-        self.cmd_sub = self.create_subscription(
-            Twist, 'cmd_vel', self.cmd_vel_cb, 10
-        )
+        self.cmd_sub = self.create_subscription(Twist, 'cmd_vel', self.cmd_vel_cb, 10)
 
         self.odom_pub = self.create_publisher(Odometry, 'odom', 50)
         self.joint_pub = self.create_publisher(JointState, 'joint_states', 50)
@@ -138,21 +143,17 @@ class RosmasterBaseNode(Node):
 
         self.tf_broadcaster = TransformBroadcaster(self)
 
-        # 주기 타이머 (50 Hz)
         self.dt = 0.02
         self.timer = self.create_timer(self.dt, self.update)
 
-    # ========== cmd_vel 콜백 ==========
     def cmd_vel_cb(self, msg: Twist):
-            # set_motor 기반 제어: 목표값만 저장 (linear.y는 차동구동에서 사용 안 함)
-            self.cmd_vx = float(msg.linear.x)      # m/s
-            self.cmd_wz = float(msg.angular.z)     # rad/s
-            
+        self.cmd_vx = float(msg.linear.x)
+        self.cmd_wz = float(msg.angular.z)
 
-    # ========== 주기 업데이트 ==========
     def update(self):
         now_time = self.get_clock().now()
         now = now_time.to_msg()
+
         if self.last_time is None:
             dt = self.dt
         else:
@@ -160,39 +161,34 @@ class RosmasterBaseNode(Node):
             if dt <= 0.0:
                 dt = self.dt
         self.last_time = now_time
-                # ====== set_motor 기반 차동구동 제어 (좌2/우2 동기) ======
+
+        # ====== set_motor 기반 차동구동 제어 ======
         def clamp(x, lo, hi):
             return max(lo, min(hi, x))
 
-        def slew(current, target, rate_per_sec, dt):
-            step = rate_per_sec * dt
+        def slew(current, target, rate_per_sec, dt_):
+            step = rate_per_sec * dt_
             if target > current + step:
                 return current + step
             if target < current - step:
                 return current - step
             return target
 
-        # cmd_vel -> 좌/우 선속도 (m/s)
         vx = self.cmd_vx
         wz = self.cmd_wz
         vL = vx - wz * (self.track_width / 2.0)
         vR = vx + wz * (self.track_width / 2.0)
 
-        # 선속도 -> PWM (선형 매핑)
-        # max_vx에서 max_pwm이 되도록 스케일
         tgtL = clamp((vL / self.max_vx) * self.pwm_max, -self.pwm_max, self.pwm_max)
         tgtR = clamp((vR / self.max_vx) * self.pwm_max, -self.pwm_max, self.pwm_max)
 
-
-        # 부드러운 가감속(램프)
         self.pwmL = slew(self.pwmL, tgtL, self.pwm_slew_rate, dt)
         self.pwmR = slew(self.pwmR, tgtR, self.pwm_slew_rate, dt)
 
-        # 모터 방향 보정(필요하면 motor_sign_* = -1.0)
         pwmL = int(round(self.pwmL * self.motor_sign_left))
         pwmR = int(round(self.pwmR * self.motor_sign_right))
 
-        # 좌2/우2 동기: (m1,m2)=left, (m3,m4)=right 라고 가정
+        # (m1,m2)=left, (m3,m4)=right 가정
         self.car.set_motor(pwmL, pwmL, pwmR, pwmR)
 
         # ---- IMU, MAG, 배터리 ----
@@ -204,29 +200,39 @@ class RosmasterBaseNode(Node):
         imu = Imu()
         imu.header.stamp = now
         imu.header.frame_id = self.imu_link
-        # gyro Z 적분으로 yaw orientation 추정 (roll/pitch는 0 가정)
+
+        # gyro Z 적분 (orientation은 ekf에서 끄는 구성이라면 참고값)
         self.imu_yaw += float(gz) * dt
         qx, qy, qz, qw = self.euler_to_quaternion(0.0, 0.0, self.imu_yaw)
         imu.orientation.x = float(qx)
         imu.orientation.y = float(qy)
         imu.orientation.z = float(qz)
         imu.orientation.w = float(qw)
+
+        # orientation covariance (yaw만 의미있게)
+        yaw_var = (self.imu_orientation_yaw_std ** 2)
         imu.orientation_covariance = [
-            1e-3, 0.0, 0.0,
-            0.0, 1e-3, 0.0,
-            0.0, 0.0, 5e-2,
+            1e-1, 0.0, 0.0,
+            0.0, 1e-1, 0.0,
+            0.0, 0.0, float(yaw_var),
         ]
+
         imu.linear_acceleration.x = float(ax)
         imu.linear_acceleration.y = float(ay)
         imu.linear_acceleration.z = float(az)
+
         imu.angular_velocity.x = float(gx)
         imu.angular_velocity.y = float(gy)
         imu.angular_velocity.z = float(gz)
+
+        # gyro z covariance (여기서 “작을수록 더 신뢰”)
+        gz_var = (self.imu_gyro_z_std ** 2)
         imu.angular_velocity_covariance = [
-            1e-3, 0.0, 0.0,
-            0.0, 1e-3, 0.0,
-            0.0, 0.0, float(self.imu_gyro_z_cov),
+            1e-2, 0.0, 0.0,
+            0.0, 1e-2, 0.0,
+            0.0, 0.0, float(gz_var),
         ]
+
         self.imu_pub.publish(imu)
 
         mag = MagneticField()
@@ -239,49 +245,33 @@ class RosmasterBaseNode(Node):
 
         self.vol_pub.publish(Float32(data=float(voltage)))
 
-        # ---- 엔코더 읽기 ----
-        # 모터1: 좌측 앞(FL), 모터2: 좌측 뒤(BL), 모터3: 우측 앞(FR), 모터4: 우측 뒤(BR)
+        # ---- 엔코더 ----
         m1, m2, m3, m4 = self.car.get_motor_encoder()
-        m1 = float(m1)
-        m2 = float(m2)
-        m3 = float(m3)
-        m4 = float(m4)
+        m1, m2, m3, m4 = float(m1), float(m2), float(m3), float(m4)
 
-        # 첫 루프에서는 이전값만 저장
         if self.prev_enc is None:
             self.prev_enc = (m1, m2, m3, m4)
             return
 
         p1, p2, p3, p4 = self.prev_enc
-        d1 = m1 - p1
-        d2 = m2 - p2
-        d3 = m3 - p3
-        d4 = m4 - p4
+        d1, d2, d3, d4 = m1 - p1, m2 - p2, m3 - p3, m4 - p4
         self.prev_enc = (m1, m2, m3, m4)
 
         if self.ticks_per_rev <= 0.0:
             self.get_logger().warn("ticks_per_rev <= 0, skip odom/joints")
             return
 
-        # ===== 엔코더 tick → 거리 변환 =====
         circ = 2.0 * math.pi * self.wheel_radius
         scale = self.enc_sign * (circ / self.ticks_per_rev)
 
-        # 모터1~4 매핑:
-        #   모터1: 좌측 앞 휠 (FL)
-        #   모터2: 좌측 뒤 휠 (BL)
-        #   모터3: 우측 앞 휠 (FR)
-        #   모터4: 우측 뒤 휠 (BR)
-        dist_fl = d1 * scale   # front-left
-        dist_bl = d2 * scale   # back-left
-        dist_fr = d3 * scale   # front-right
-        dist_br = d4 * scale   # back-right
+        dist_fl = d1 * scale
+        dist_bl = d2 * scale
+        dist_fr = d3 * scale
+        dist_br = d4 * scale
 
-        # 좌/우 바퀴 평균 거리 (skid-steer 4WD)
         dist_left = 0.5 * (dist_fl + dist_bl)
         dist_right = 0.5 * (dist_fr + dist_br)
 
-        # ===== 차동 구동 모델로 odom 계산 =====
         ds = 0.5 * (dist_right + dist_left)
         dtheta = 0.0
         if self.track_width != 0.0:
@@ -291,15 +281,14 @@ class RosmasterBaseNode(Node):
         self.x += float(ds * math.cos(self.yaw))
         self.y += float(ds * math.sin(self.yaw))
 
-        # yaw → quaternion (z축 회전만 사용)
         cy = math.cos(self.yaw * 0.5)
         sy = math.sin(self.yaw * 0.5)
 
-        # ----- Odometry 메시지 -----
         odom = Odometry()
         odom.header.stamp = now
         odom.header.frame_id = self.odom_frame
         odom.child_frame_id = self.base_frame
+
         odom.pose.pose.position.x = float(self.x)
         odom.pose.pose.position.y = float(self.y)
         odom.pose.pose.position.z = 0.0
@@ -308,17 +297,21 @@ class RosmasterBaseNode(Node):
         odom.pose.pose.orientation.z = float(sy)
         odom.pose.pose.orientation.w = float(cy)
 
+        # ===== pose covariance (분산=std^2) =====
+        odom.pose.covariance = [0.0] * 36
+        odom.pose.covariance[0] = float(self.odom_pose_x_std ** 2)      # x
+        odom.pose.covariance[7] = float(self.odom_pose_y_std ** 2)      # y
+        odom.pose.covariance[35] = float(self.odom_pose_yaw_std ** 2)   # yaw
+
         odom.twist.twist.linear.x = float(ds / dt)
         odom.twist.twist.linear.y = 0.0
         odom.twist.twist.angular.z = float(dtheta / dt)
-        odom.twist.covariance = [
-            1e-3, 0.0, 0.0, 0.0, 0.0, 0.0,
-            0.0, 1e-3, 0.0, 0.0, 0.0, 0.0,
-            0.0, 0.0, 1e-3, 0.0, 0.0, 0.0,
-            0.0, 0.0, 0.0, 1e-3, 0.0, 0.0,
-            0.0, 0.0, 0.0, 0.0, 1e-3, 0.0,
-            0.0, 0.0, 0.0, 0.0, 0.0, float(self.encoder_vyaw_cov),
-        ]
+
+        # ===== twist covariance (EKF에서 vx, vyaw만 쓰므로 거기만 설정) =====
+        odom.twist.covariance = [0.0] * 36
+        odom.twist.covariance[0] = float(self.odom_twist_vx_std ** 2)     # vx
+        odom.twist.covariance[35] = float(self.odom_twist_wz_std ** 2)    # vyaw
+
         self.odom_pub.publish(odom)
 
         # ----- TF (odom → base_footprint) -----
@@ -336,9 +329,7 @@ class RosmasterBaseNode(Node):
             t.transform.rotation.w = float(cy)
             self.tf_broadcaster.sendTransform(t)
 
-        # ===== JointState (바퀴 회전 각도) =====
-        # 각 바퀴: 이동거리 / 반지름 → 회전각(rad)
-        # joint 이름 순서: FR, FL, BR, BL
+        # ===== JointState =====
         self.wheel_angles[0] += float(dist_fr / self.wheel_radius)  # FR
         self.wheel_angles[1] += float(dist_fl / self.wheel_radius)  # FL
         self.wheel_angles[2] += float(dist_br / self.wheel_radius)  # BR
@@ -371,4 +362,3 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-
