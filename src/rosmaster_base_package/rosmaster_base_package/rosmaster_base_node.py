@@ -31,7 +31,7 @@ class RosmasterBaseNode(Node):
         super().__init__('rosmaster_base_node')
 
         # ===== 파라미터 =====
-        self.declare_parameter('wheel_radius', 0.100)      # 바퀴 반지름 (m)
+        self.declare_parameter('wheel_radius', 0.097)      # 바퀴 반지름 (m)
         self.declare_parameter('track_width', 0.483)       # 좌/우 바퀴 간 거리 (m)
         self.declare_parameter('ticks_per_rev', 8896.0)    # 바퀴 1회전당 엔코더 tick 수
         self.declare_parameter('imu_link', 'imu_link')
@@ -40,7 +40,7 @@ class RosmasterBaseNode(Node):
         # 엔코더 tick 부호 (전진 시 tick 이 증가면 1.0, 감소면 -1.0)
         self.declare_parameter('enc_sign', -1.0)
         # 회전량 보정 계수 (실측 대비 과대/과소 회전을 맞추기 위해 기본 0.8 적용)
-        self.declare_parameter('yaw_scale', 0.725)
+        self.declare_parameter('yaw_scale', 0.765)
         # EKF를 사용할 경우 odom->base TF는 EKF에서 브로드캐스트하도록 옵션 제공
         self.declare_parameter('publish_odom_tf', True)
         
