@@ -46,7 +46,8 @@ class RosmasterBaseNode(Node):
         
                 # ====== set_motor 기반 속도제어 파라미터 ======
         # PWM=100일 때의 실측 최대 선속도(m/s). (대략값으로 시작해도 됨)
-        self.declare_parameter('max_vx', 1.0)
+        self.declare_parameter('max_vx', 0.61)
+        self.declare_parameter('pwm_max', 90.0)  # pwm 최대출력 
         # PWM 변화율 제한 (부드러운 가감속): 초당 PWM 변화량
         self.declare_parameter('pwm_slew_rate', 80.0)
         # 모터 방향이 반대면 -1.0으로 뒤집기 (좌/우 각각)
@@ -54,6 +55,7 @@ class RosmasterBaseNode(Node):
         self.declare_parameter('motor_sign_right', 1.0)
 
         self.max_vx = float(self.get_parameter('max_vx').value)
+        self.pwm_max = float(self.get_parameter('pwm_max').value)
         self.pwm_slew_rate = float(self.get_parameter('pwm_slew_rate').value)
         self.motor_sign_left = float(self.get_parameter('motor_sign_left').value)
         self.motor_sign_right = float(self.get_parameter('motor_sign_right').value)
@@ -169,9 +171,10 @@ class RosmasterBaseNode(Node):
         vR = vx + wz * (self.track_width / 2.0)
 
         # 선속도 -> PWM (선형 매핑)
-        # max_vx에서 PWM=100이 되도록 스케일
-        tgtL = clamp((vL / self.max_vx) * 100.0, -100.0, 100.0)
-        tgtR = clamp((vR / self.max_vx) * 100.0, -100.0, 100.0)
+        # max_vx에서 max_pwm이 되도록 스케일
+        tgtL = clamp((vL / self.max_vx) * self.pwm_max, -self.pwm_max, self.pwm_max)
+        tgtR = clamp((vR / self.max_vx) * self.pwm_max, -self.pwm_max, self.pwm_max)
+
 
         # 부드러운 가감속(램프)
         self.pwmL = slew(self.pwmL, tgtL, self.pwm_slew_rate, dt)
