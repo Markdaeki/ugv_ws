@@ -1,87 +1,61 @@
 #!/usr/bin/env python3
 import math
-
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
 
+def wrap_to_pi(a: float) -> float:
+    # (-pi, pi]로 정규화
+    return (a + math.pi) % (2.0 * math.pi) - math.pi
 
 class ScanFrontFilterNode(Node):
     def __init__(self):
         super().__init__('scan_front_filter')
 
-        # 파라미터: 앞쪽 범위 (rad)
-        #
-        # 라이다 조인트를 180도 회전시켜 base_link와 정렬한 상태이므로
-        # 로봇의 "정면"을 선택하려면 스캔 좌표계 기준으로 π/2 ~ 3π/2를
-        # 필터링해야 한다.
-        self.declare_parameter('lower_angle',  math.pi / 2.0)      # +90 deg
-        self.declare_parameter('upper_angle',  3.0 * math.pi / 2.0)  # +270 deg
-
+        # 원하는 전면 범위: -90~+90 deg
+        self.declare_parameter('lower_angle', -math.pi/2)  # -90
+        self.declare_parameter('upper_angle',  math.pi/2)  # +90
         self.lower_angle = float(self.get_parameter('lower_angle').value)
         self.upper_angle = float(self.get_parameter('upper_angle').value)
 
-        # 입력: /scan_raw (RPLIDAR 원본)
-        self.scan_sub = self.create_subscription(
-            LaserScan,
-            '/scan_raw',
-            self.scan_callback,
-            10
-        )
-
-        # 출력: /scan
-        self.scan_pub = self.create_publisher(
-            LaserScan,
-            '/scan',
-            10
-        )
-
-        self.get_logger().info(
-            f"ScanFrontFilterNode started: "
-            f"lower_angle={self.lower_angle:.3f}, upper_angle={self.upper_angle:.3f}"
-        )
+        self.scan_sub = self.create_subscription(LaserScan, '/scan_raw', self.scan_callback, 10)
+        self.scan_pub = self.create_publisher(LaserScan, '/scan', 10)
 
     def scan_callback(self, msg: LaserScan):
-        # LaserScan 각도 범위
-        angle_min = msg.angle_min
-        angle_max = msg.angle_max
-        angle_inc = msg.angle_increment
+        a_min = msg.angle_min
+        inc = msg.angle_increment
+        n = len(msg.ranges)
 
-        # 인덱스 범위 계산
-        # idx = round((angle - angle_min) / angle_inc)
-        start_idx = int(round((self.lower_angle - angle_min) / angle_inc))
-        end_idx   = int(round((self.upper_angle - angle_min) / angle_inc))
+        # 각 빔 i의 각도를 (-pi, pi]로 바꿔서 전면(-90~+90)만 선택
+        selected_ranges = []
+        selected_intensities = [] if msg.intensities else None
+        selected_angles = []
 
-        # 인덱스 범위 클램핑
-        start_idx = max(0, min(start_idx, len(msg.ranges) - 1))
-        end_idx   = max(0, min(end_idx, len(msg.ranges) - 1))
+        for i in range(n):
+            a = a_min + i * inc
+            aw = wrap_to_pi(a)
+            if self.lower_angle <= aw <= self.upper_angle:
+                selected_ranges.append(msg.ranges[i])
+                if selected_intensities is not None:
+                    selected_intensities.append(msg.intensities[i])
+                selected_angles.append(aw)
 
-        if start_idx >= end_idx:
-            # 범위가 말이 안 되면 그냥 통과
-            self.scan_pub.publish(msg)
-            return
+        if len(selected_ranges) < 2:
+            return  # 너무 적으면 publish 안 함
 
-        # 새 LaserScan 메시지 생성
-        new_msg = LaserScan()
-        new_msg.header = msg.header
+        out = LaserScan()
+        out.header = msg.header  # stamp/frame 유지(현재가 안정적)
+        out.angle_min = min(selected_angles)
+        out.angle_max = max(selected_angles)
+        out.angle_increment = inc
+        out.time_increment = msg.time_increment
+        out.scan_time = msg.scan_time
+        out.range_min = msg.range_min
+        out.range_max = msg.range_max
+        out.ranges = selected_ranges
+        out.intensities = selected_intensities if selected_intensities is not None else []
 
-        new_msg.angle_min = angle_min + start_idx * angle_inc
-        new_msg.angle_max = angle_min + end_idx   * angle_inc
-        new_msg.angle_increment = angle_inc
-
-        new_msg.time_increment = msg.time_increment
-        new_msg.scan_time = msg.scan_time
-        new_msg.range_min = msg.range_min
-        new_msg.range_max = msg.range_max
-
-        new_msg.ranges = msg.ranges[start_idx:end_idx+1]
-        if msg.intensities:
-            new_msg.intensities = msg.intensities[start_idx:end_idx+1]
-        else:
-            new_msg.intensities = []
-
-        self.scan_pub.publish(new_msg)
-
+        self.scan_pub.publish(out)
 
 def main(args=None):
     rclpy.init(args=args)
@@ -89,7 +63,6 @@ def main(args=None):
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
-
 
 if __name__ == '__main__':
     main()
