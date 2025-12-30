@@ -77,8 +77,6 @@ def generate_launch_description():
         name='scan_front_filter',
         output='screen',
         parameters=[{
-            'lower_angle': 1.5708,  # +90 deg
-            'upper_angle': 4.7124,  # +270 deg
         }]
     )
 
