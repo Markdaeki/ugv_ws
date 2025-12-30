@@ -213,7 +213,7 @@
     <parent link="base_link"/>
     <child link="laser_link"/>
     <!-- LIDAR 데이터가 실제 전면과 일치하도록 180도 회전 -->
-    <origin xyz="${LIDAR_X} 0 ${LIDAR_Z}" rpy="0 0 0"/>
+    <origin xyz="${LIDAR_X} 0 ${LIDAR_Z}" rpy="0 0 ${PI}"/>
   </joint>
 
   <joint name="imu_joint" type="fixed">
