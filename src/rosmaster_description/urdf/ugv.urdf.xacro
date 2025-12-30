@@ -11,7 +11,7 @@
   <!-- 휠 파라미터 (rosmaster_base_node와 일치) -->
   <xacro:property name="WHEEL_RADIUS" value="0.097"/>
   <xacro:property name="WHEEL_WIDTH"  value="0.097"/>
-  <xacro:property name="TRACK_WIDTH"  value="0.482"/>   <!-- 좌/우 바퀴 간 거리 -->
+  <xacro:property name="TRACK_WIDTH"  value="0.483"/>   <!-- 좌/우 바퀴 간 거리 -->
   <xacro:property name="WHEELBASE"    value="0.255"/>   <!-- 전/후 바퀴 간 거리 -->
   <xacro:property name="WHEEL_MASS"   value="0.1"/>
 
