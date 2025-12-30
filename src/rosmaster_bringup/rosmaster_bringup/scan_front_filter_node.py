@@ -32,6 +32,9 @@ class ScanFrontFilterNode(Node):
         )
 
     def scan_callback(self, msg: LaserScan):
+        self.angle_offset = float(self.get_parameter('angle_offset').value)
+        offset = self.angle_offset
+
         out = LaserScan()
         out.header = msg.header
 
