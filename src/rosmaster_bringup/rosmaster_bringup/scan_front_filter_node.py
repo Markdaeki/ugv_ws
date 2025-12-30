@@ -21,18 +21,18 @@ class ScanFrontFilterNode(Node):
         self.lower_angle = float(self.get_parameter('lower_angle').value)
         self.upper_angle = float(self.get_parameter('upper_angle').value)
 
-        # 입력: /scan (RPLIDAR 원본)
+        # 입력: /scan_raw (RPLIDAR 원본)
         self.scan_sub = self.create_subscription(
             LaserScan,
-            '/scan',
+            '/scan_raw',
             self.scan_callback,
             10
         )
 
-        # 출력: /scan_front
+        # 출력: /scan
         self.scan_pub = self.create_publisher(
             LaserScan,
-            '/scan_front',
+            '/scan',
             10
         )
 
