@@ -64,7 +64,6 @@ class ScanFrontFilterNode(Node):
         # 새 LaserScan 메시지 생성
         new_msg = LaserScan()
         new_msg.header = msg.header
-        new_msg.header.stamp = self.get_clock().now().to_msg()
 
         new_msg.angle_min = angle_min + start_idx * angle_inc
         new_msg.angle_max = angle_min + end_idx   * angle_inc
