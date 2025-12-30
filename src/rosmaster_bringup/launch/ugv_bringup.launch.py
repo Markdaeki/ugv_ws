@@ -63,7 +63,7 @@ def generate_launch_description():
             'serial_port': '/dev/rplidar',
             'serial_baudrate': 460800,
             'frame_id': 'laser_link',
-            'inverted': False,
+            'inverted': True,
             'angle_compensate': True,
         }],
         remappings=[
