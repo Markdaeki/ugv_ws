@@ -67,7 +67,7 @@ def generate_launch_description():
             'angle_compensate': True,
         }],
         remappings=[
-            ('scan', '/scan'),
+            ('scan', '/scan_raw'),
         ]
     )
 
